@@ -29,9 +29,6 @@
     <ClInclude Include="PrimitiveRenderer.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="Engine1.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
     <ClInclude Include="Engine.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>

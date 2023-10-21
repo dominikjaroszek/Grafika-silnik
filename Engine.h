@@ -1,46 +1,32 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <iostream>
-#include <fstream>
-#include <string>
+#include "PrimitiveRenderer.h"
 
 class Engine {
 public:
     static Engine& getInstance();
 
-
-    void init(int screenWidth, int screenHeight, std::string windowTitle);
+    void init(int screenWidth, int screenHeight, const std::string& windowTitle);
     void setFramesPerSecond(int fps);
-
     void setWindowSize(int width, int height);
-
     void setFullscreen(bool fullscreen);
     void enableMouseInput();
     void handleInput();
-
     void update();
-
     void clearScreen(const sf::Color& color);
-
     void draw();
-
     void display();
-
     void run();
-    sf::RenderWindow& GetWindow();
+    sf::RenderWindow& getWindow();
 
 private:
     sf::RenderWindow window;
     bool initialized;
 
-
     Engine();
-
     ~Engine();
-
-
+    Engine(const Engine&) = delete;
+    Engine& operator=(const Engine&) = delete;
     void logError(const std::string& errorMessage);
-
-
-    void logInfo(const std::string& infoMessage); 
+    void logInfo(const std::string& infoMessage);
 };

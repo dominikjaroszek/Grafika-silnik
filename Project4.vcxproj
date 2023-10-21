@@ -139,7 +139,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h" />
-    <ClInclude Include="Engine1.h" />
     <ClInclude Include="PrimitiveRenderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
