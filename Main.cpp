@@ -10,7 +10,7 @@ int main() {
     gameEngine.init(800, 600, "Game Window");
     
 
-    PrimitiveRenderer  primativeRender (gameEngine.GetWindow());
+   
     gameEngine.run();
     return 0;
 }
