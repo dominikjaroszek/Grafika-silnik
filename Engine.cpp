@@ -86,12 +86,6 @@ void Engine::draw() {
 
     primitiveRenderer.drawLine(linePoint1, linePoint2, lineColor);
 
-    sf::Vector2f linePoint3(410.0f, 410.0f);
-    sf::Vector2f linePoint4(500.0f, 410.0f);
-    sf::Color lineColor2(sf::Color::Yellow);
-
-    primitiveRenderer.drawLine(linePoint3, linePoint4, lineColor2);
-
     sf::Vector2f linePoint5(0.0f, 0.0f);
     sf::Vector2f linePoint6(500.0f, 600.0f);
     sf::Color lineColor3(sf::Color::Red);
