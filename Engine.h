@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "PrimitiveRenderer.h"
+#include "Point2D.h"
+#include "LineSegment.h"
 
 class Engine {
 public:

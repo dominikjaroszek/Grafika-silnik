@@ -22,7 +22,7 @@ void LineSegment::setEnd( Point2D newEnd) {
     endPoint = newEnd;
 }
 
-void LineSegment::draw(PrimitiveRenderer renderer, sf::Color& color, bool incrementalAlgorithm) {
+void LineSegment::draw(PrimitiveRenderer renderer, sf::Color color, bool incrementalAlgorithm) {
     sf::Vector2f startCoords = startPoint.getCoordinates();
     sf::Vector2f endCoords = endPoint.getCoordinates();
 

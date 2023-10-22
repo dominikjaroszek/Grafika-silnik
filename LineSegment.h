@@ -13,9 +13,10 @@ public:
     void setStart( Point2D newStart);
     void setEnd( Point2D newEnd);
 
-    void draw(PrimitiveRenderer renderer, sf::Color& color , bool incrementalAlgorithm );
+    void draw(PrimitiveRenderer renderer, sf::Color color , bool incrementalAlgorithm );
 
 private:
     Point2D startPoint;
     Point2D endPoint;
+
 };

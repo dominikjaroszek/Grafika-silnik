@@ -66,6 +66,8 @@ void Engine::clearScreen(const sf::Color color) {
 void Engine::draw() {
     // Utwórz instancjê klasy PrimitiveRenderer, przekazuj¹c referencjê do sf::RenderWindow
     PrimitiveRenderer primitiveRenderer(window);
+    Point2D point, start, stop;
+    
 
     // Teraz mo¿esz u¿yæ funkcji rysuj¹cych z klasy PrimitiveRenderer
     sf::Vector2f position(100.0f, 100.0f);
@@ -90,6 +92,19 @@ void Engine::draw() {
     sf::Vector2f linePoint6(500.0f, 600.0f);
     sf::Color lineColor3(sf::Color::Red);
     primitiveRenderer.drawLineInstrukcja(linePoint5, linePoint6, lineColor3);
+
+    point.setCoordinates(50.0, 50.0);
+    point.draw(primitiveRenderer, sf::Color::Magenta);
+
+    start.setCoordinates(10.0, 10.0);
+    stop.setCoordinates(500.0, 200.0);
+
+    LineSegment line(start,stop);
+    line.draw(primitiveRenderer, sf::Color::Cyan, true);
+
+
+
+
 }
 
 
