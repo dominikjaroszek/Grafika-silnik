@@ -64,9 +64,35 @@ void Engine::clearScreen(const sf::Color& color) {
 }
 
 void Engine::draw() {
-    // Rysowanie obiektów gry
-    PrimitiveRenderer primitiveRender(window); // Przyk³ad u¿ycia PrimitiveRenderer
+    // Utwórz instancjê klasy PrimitiveRenderer, przekazuj¹c referencjê do sf::RenderWindow
+    PrimitiveRenderer primitiveRenderer(window);
+
+    // Teraz mo¿esz u¿yæ funkcji rysuj¹cych z klasy PrimitiveRenderer
+    sf::Vector2f position(100.0f, 100.0f);
+    sf::Vector2f size(50.0f, 50.0f);
+    sf::Color color(sf::Color::Red);
+
+    primitiveRenderer.drawRectangle(position, size, color);
+
+    sf::Vector2f circlePosition(200.0f, 200.0f);
+    float circleRadius = 30.0f;
+    sf::Color circleColor(sf::Color::Blue);
+
+    primitiveRenderer.drawCircle(circlePosition, circleRadius, circleColor);
+
+    sf::Vector2f linePoint1(300.0f, 300.0f);
+    sf::Vector2f linePoint2(400.0f, 400.0f);
+    sf::Color lineColor(sf::Color::Green);
+
+    primitiveRenderer.drawLine(linePoint1, linePoint2, lineColor);
+
+    sf::Vector2f linePoint3(410.0f, 410.0f);
+    sf::Vector2f linePoint4(500.0f, 410.0f);
+    sf::Color lineColor2(sf::Color::Yellow);
+
+    primitiveRenderer.drawLine(linePoint3, linePoint4, lineColor2);
 }
+
 
 void Engine::display() {
     window.display();
@@ -107,7 +133,3 @@ void Engine::logInfo(const std::string& infoMessage) {
     diagnosticLog << "Info: " << infoMessage << std::endl;
     diagnosticLog.close();
 }
-
-
-
-KiedyFotkaDlaMnie

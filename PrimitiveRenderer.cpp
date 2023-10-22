@@ -25,3 +25,41 @@ void PrimitiveRenderer::drawLine(const sf::Vector2f& point1, const sf::Vector2f&
     };
     window.draw(line, 2, sf::Lines);
 }
+
+void PrimitiveRenderer::drawLineIncremental(const sf::Vector2f& point1, const sf::Vector2f& point2, const sf::Color& color) {
+    // Algorytm przyrostowy do rysowania odcinka
+    sf::Vector2f delta = point2 - point1;
+    sf::Vector2f step = sf::Vector2f(1, 1);
+
+    if (delta.x < 0) {
+        step.x = -1;
+    }
+    if (delta.y < 0) {
+        step.y = -1;
+    }
+
+    delta.x = std::abs(delta.x);
+    delta.y = std::abs(delta.y);
+
+    float error = delta.x - delta.y;
+    sf::Vector2f currentPoint = point1;
+
+    while (currentPoint != point2) {
+        // Rysuj punkt na obecnym miejscu
+        sf::RectangleShape pixel(step);
+        pixel.setPosition(currentPoint);
+        pixel.setFillColor(color);
+        window.draw(pixel);
+
+        float error2 = 2 * error;
+
+        if (error2 > -delta.y) {
+            error -= delta.y;
+            currentPoint.x += step.x;
+        }
+        if (error2 < delta.x) {
+            error += delta.x;
+            currentPoint.y += step.y;
+        }
+    }
+}
