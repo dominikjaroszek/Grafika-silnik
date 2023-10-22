@@ -12,5 +12,7 @@ int main() {
 
    
     gameEngine.run();
+    domnikTestJASK;
+
     return 0;
 }
