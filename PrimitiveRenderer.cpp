@@ -1,4 +1,5 @@
 #include "PrimitiveRenderer.h"
+#include <iostream>
 
 PrimitiveRenderer::PrimitiveRenderer(sf::RenderWindow& window) : window(window) {
     // Konstruktor - implementacja, jeœli jest potrzebna
@@ -61,5 +62,41 @@ void PrimitiveRenderer::drawLineIncremental(const sf::Vector2f& point1, const sf
             error += delta.x;
             currentPoint.y += step.y;
         }
+    }
+}
+
+
+void PrimitiveRenderer::drawLineInstrukcja(const sf::Vector2f& startingPoint, const sf::Vector2f& endPoint, const sf::Color& color) {
+    float delta_x = std::abs(endPoint.x - startingPoint.x);
+    float delta_y = std::abs(endPoint.y - startingPoint.y);
+
+    float m = delta_y / delta_x;
+
+    sf::Vector2f currentPoint = startingPoint;
+
+
+    for(int i=0;i<=delta_x;i++){
+        float temp = currentPoint.y;
+        currentPoint.y = (int)currentPoint.y;
+        sf::Vector2f step = sf::Vector2f(1, 1);
+        sf::RectangleShape pixel(step);
+        pixel.setPosition(currentPoint);
+        pixel.setFillColor(color);
+        window.draw(pixel);
+        currentPoint.y = temp;
+        
+        if(startingPoint.x < endPoint.x)
+            currentPoint.x += 1;
+        else
+            currentPoint.x -= 1;
+
+        if (startingPoint.y < endPoint.y)
+            currentPoint.y += m;
+        else
+            currentPoint.y -= m;
+
+    
+    
+        
     }
 }

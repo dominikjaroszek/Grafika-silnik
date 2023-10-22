@@ -91,6 +91,11 @@ void Engine::draw() {
     sf::Color lineColor2(sf::Color::Yellow);
 
     primitiveRenderer.drawLine(linePoint3, linePoint4, lineColor2);
+
+    sf::Vector2f linePoint6(0.0f, 0.0f);
+    sf::Vector2f linePoint5(500.0f, 50.0f);
+    sf::Color lineColor3(sf::Color::Red);
+    primitiveRenderer.drawLineInstrukcja(linePoint5, linePoint6, lineColor3);
 }
 
 
@@ -101,6 +106,8 @@ void Engine::display() {
 void Engine::run() {
     sf::Clock clock;
     float deltaTime = 0.0f;
+    draw();
+    display();
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -110,10 +117,10 @@ void Engine::run() {
         deltaTime = clock.restart().asSeconds();
         handleInput();
         update();
-        clearScreen(sf::Color::Black);
-        draw();
-        display();
+        
+        //display();
     }
+    
 }
 
 sf::RenderWindow& Engine::getWindow() {
