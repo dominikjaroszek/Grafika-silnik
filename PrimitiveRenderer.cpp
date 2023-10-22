@@ -5,21 +5,21 @@ PrimitiveRenderer::PrimitiveRenderer(sf::RenderWindow& window) : window(window) 
     // Konstruktor - implementacja, jeœli jest potrzebna
 }
 
-void PrimitiveRenderer::drawRectangle(const sf::Vector2f& position, const sf::Vector2f& size, const sf::Color& color) {
+void PrimitiveRenderer::drawRectangle(const sf::Vector2f position, const sf::Vector2f size, const sf::Color color) {
     sf::RectangleShape rectangle(size);
     rectangle.setPosition(position);
     rectangle.setFillColor(color);
     window.draw(rectangle);
 }
 
-void PrimitiveRenderer::drawCircle(const sf::Vector2f& position, float radius, const sf::Color& color) {
+void PrimitiveRenderer::drawCircle(const sf::Vector2f position, float radius, const sf::Color color) {
     sf::CircleShape circle(radius);
     circle.setPosition(position);
     circle.setFillColor(color);
     window.draw(circle);
 }
 
-void PrimitiveRenderer::drawLine(const sf::Vector2f& point1, const sf::Vector2f& point2, const sf::Color& color) {
+void PrimitiveRenderer::drawLine(const sf::Vector2f point1, const sf::Vector2f point2, const sf::Color color) {
     sf::Vertex line[] = {
         sf::Vertex(point1, color),
         sf::Vertex(point2, color)
@@ -27,7 +27,7 @@ void PrimitiveRenderer::drawLine(const sf::Vector2f& point1, const sf::Vector2f&
     window.draw(line, 2, sf::Lines);
 }
 
-void PrimitiveRenderer::drawLineIncremental(const sf::Vector2f& point1, const sf::Vector2f& point2, const sf::Color& color) {
+void PrimitiveRenderer::drawLineIncremental(const sf::Vector2f point1, const sf::Vector2f point2, const sf::Color color) {
     // Algorytm przyrostowy do rysowania odcinka
     sf::Vector2f delta = point2 - point1;
     sf::Vector2f step = sf::Vector2f(1, 1);
@@ -66,10 +66,10 @@ void PrimitiveRenderer::drawLineIncremental(const sf::Vector2f& point1, const sf
 }
 
 
-void PrimitiveRenderer::drawLineInstrukcja(const sf::Vector2f& startingPoint, const sf::Vector2f& endPoint, const sf::Color& color) {
+void PrimitiveRenderer::drawLineInstrukcja(const sf::Vector2f startingPoint, const sf::Vector2f endPoint, const sf::Color color) {
     float delta_x = std::abs(endPoint.x - startingPoint.x);
     float delta_y = std::abs(endPoint.y - startingPoint.y);
-
+    sf::Vector2f step = sf::Vector2f(1, 1);
     float m = delta_y / delta_x;
 
     sf::Vector2f currentPoint = startingPoint;
@@ -78,7 +78,7 @@ void PrimitiveRenderer::drawLineInstrukcja(const sf::Vector2f& startingPoint, co
     for(int i=0;i<=delta_x;i++){
         float temp = currentPoint.y;
         currentPoint.y = (int)currentPoint.y;
-        sf::Vector2f step = sf::Vector2f(1, 1);
+        
         sf::RectangleShape pixel(step);
         pixel.setPosition(currentPoint);
         pixel.setFillColor(color);

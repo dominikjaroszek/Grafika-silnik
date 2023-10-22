@@ -17,7 +17,7 @@ Engine& Engine::getInstance() {
     return instance;
 }
 
-void Engine::init(int screenWidth, int screenHeight, const std::string& windowTitle) {
+void Engine::init(int screenWidth, int screenHeight, const std::string windowTitle) {
     if (!initialized) {
         window.create(sf::VideoMode(screenWidth, screenHeight), windowTitle);
         window.setFramerateLimit(60);
@@ -59,7 +59,7 @@ void Engine::update() {
     // Aktualizacja logiki gry
 }
 
-void Engine::clearScreen(const sf::Color& color) {
+void Engine::clearScreen(const sf::Color color) {
     window.clear(color);
 }
 
@@ -92,8 +92,8 @@ void Engine::draw() {
 
     primitiveRenderer.drawLine(linePoint3, linePoint4, lineColor2);
 
-    sf::Vector2f linePoint6(0.0f, 0.0f);
-    sf::Vector2f linePoint5(500.0f, 50.0f);
+    sf::Vector2f linePoint6(1.0f, 1.0f);
+    sf::Vector2f linePoint5(0.0f, 200.0f);
     sf::Color lineColor3(sf::Color::Red);
     primitiveRenderer.drawLineInstrukcja(linePoint5, linePoint6, lineColor3);
 }
@@ -127,14 +127,14 @@ sf::RenderWindow& Engine::getWindow() {
     return window;
 }
 
-void Engine::logError(const std::string& errorMessage) {
+void Engine::logError(const std::string errorMessage) {
     // Obs³uga b³êdów
     std::ofstream errorLog("error_log.txt", std::ios::app);
     errorLog << "Error: " << errorMessage << std::endl;
     errorLog.close();
 }
 
-void Engine::logInfo(const std::string& infoMessage) {
+void Engine::logInfo(const std::string infoMessage) {
     // Logowanie informacji diagnostycznych
     std::ofstream diagnosticLog("diagnostic_log.txt", std::ios::app);
     diagnosticLog << "Info: " << infoMessage << std::endl;
