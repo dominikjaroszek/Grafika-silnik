@@ -70,6 +70,8 @@ void PrimitiveRenderer::drawLineInstrukcja(const sf::Vector2f& startingPoint, co
     float delta_x = std::abs(endPoint.x - startingPoint.x);
     float delta_y = std::abs(endPoint.y - startingPoint.y);
     sf::Vector2f currentPoint = startingPoint;
+    sf::Vector2f step = sf::Vector2f(1, 1);
+    sf::RectangleShape pixel(step);
     float m = 0;
 
     if (delta_x > delta_y) {
@@ -77,8 +79,6 @@ void PrimitiveRenderer::drawLineInstrukcja(const sf::Vector2f& startingPoint, co
         for (int i = 0; i <= delta_x; i++) {
             float temp = currentPoint.y;
             currentPoint.y = (int)currentPoint.y;
-            sf::Vector2f step = sf::Vector2f(1, 1);
-            sf::RectangleShape pixel(step);
             pixel.setPosition(currentPoint);
             pixel.setFillColor(color);
             window.draw(pixel);
@@ -100,8 +100,6 @@ void PrimitiveRenderer::drawLineInstrukcja(const sf::Vector2f& startingPoint, co
         for (int i = 0; i <= delta_y; i++) {
             float temp = currentPoint.x;
             currentPoint.x = (int)currentPoint.x;
-            sf::Vector2f step = sf::Vector2f(1, 1);
-            sf::RectangleShape pixel(step);
             pixel.setPosition(currentPoint);
             pixel.setFillColor(color);
             window.draw(pixel);
