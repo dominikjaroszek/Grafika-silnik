@@ -107,3 +107,7 @@ void Engine::logInfo(const std::string& infoMessage) {
     diagnosticLog << "Info: " << infoMessage << std::endl;
     diagnosticLog.close();
 }
+
+
+
+KiedyFotkaDlaMnie
