@@ -6,6 +6,7 @@ Point2D::Point2D(float xx, float yy)
     y = yy;
 }
 
+
 sf::Vector2f Point2D::getCoordinates() {
     return sf::Vector2f(x, y);
 }

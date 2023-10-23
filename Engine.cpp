@@ -3,13 +3,13 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-
+#include<vector>
 Engine::Engine() : initialized(false) {
-    // Inicjacja konstruktora (np. inicjalizacja zmiennych)
+
 }
 
 Engine::~Engine() {
-    // Deinicjacja (np. sprz¹tanie pamiêci, zamkniêcie plików itp.)
+    
 }
 
 Engine& Engine::getInstance() {
@@ -64,12 +64,12 @@ void Engine::clearScreen(const sf::Color color) {
 }
 
 void Engine::draw() {
-    // Utwórz instancjê klasy PrimitiveRenderer, przekazuj¹c referencjê do sf::RenderWindow
+   
     PrimitiveRenderer primitiveRenderer(window);
     Point2D point, start, stop;
     
 
-    // Teraz mo¿esz u¿yæ funkcji rysuj¹cych z klasy PrimitiveRenderer
+
     sf::Vector2f position(100.0f, 100.0f);
     sf::Vector2f size(50.0f, 50.0f);
     sf::Color color(sf::Color::Red);
@@ -91,7 +91,7 @@ void Engine::draw() {
     sf::Vector2f linePoint5(0.0f, 0.0f);
     sf::Vector2f linePoint6(500.0f, 600.0f);
     sf::Color lineColor3(sf::Color::Red);
-    primitiveRenderer.drawLineInstrukcja(linePoint5, linePoint6, lineColor3);
+   // primitiveRenderer.drawLineInstrukcja(linePoint5, linePoint6, lineColor3);
 
     point.setCoordinates(50.0, 50.0);
     point.draw(primitiveRenderer, sf::Color::Magenta);
@@ -101,6 +101,17 @@ void Engine::draw() {
 
     LineSegment line(start,stop);
     line.draw(primitiveRenderer, sf::Color::Cyan, true);
+
+
+    std::vector<sf::Vector2f> points;
+    points.push_back(linePoint5);
+    points.push_back(linePoint6);
+    points.push_back(linePoint2);
+
+    primitiveRenderer.brokeLine(points, sf::Color::Green, 0);
+
+
+    
 
 
 
@@ -136,14 +147,14 @@ sf::RenderWindow& Engine::getWindow() {
 }
 
 void Engine::logError(const std::string errorMessage) {
-    // Obs³uga b³êdów
+    
     std::ofstream errorLog("error_log.txt", std::ios::app);
     errorLog << "Error: " << errorMessage << std::endl;
     errorLog.close();
 }
 
 void Engine::logInfo(const std::string infoMessage) {
-    // Logowanie informacji diagnostycznych
+    
     std::ofstream diagnosticLog("diagnostic_log.txt", std::ios::app);
     diagnosticLog << "Info: " << infoMessage << std::endl;
     diagnosticLog.close();

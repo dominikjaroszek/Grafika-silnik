@@ -28,7 +28,7 @@ void LineSegment::draw(PrimitiveRenderer renderer, sf::Color color, bool increme
 
     if (incrementalAlgorithm) {
         renderer.drawLineInstrukcja(startCoords, endCoords, color);
-        
+            
     }
     else {
         renderer.drawLine(startCoords, endCoords, color);

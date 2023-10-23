@@ -1,25 +1,26 @@
 #include "PrimitiveRenderer.h"
 #include <iostream>
+#include<vector>
 
 PrimitiveRenderer::PrimitiveRenderer(sf::RenderWindow& window) : window(window) {
     // Konstruktor - implementacja, jeœli jest potrzebna
 }
 
-void PrimitiveRenderer::drawRectangle(const sf::Vector2f position, const sf::Vector2f size, const sf::Color color) {
+void PrimitiveRenderer::drawRectangle(  sf::Vector2f position,   sf::Vector2f size,   sf::Color color) {
     sf::RectangleShape rectangle(size);
     rectangle.setPosition(position);
     rectangle.setFillColor(color);
     window.draw(rectangle);
 }
 
-void PrimitiveRenderer::drawCircle(const sf::Vector2f position, float radius, const sf::Color color) {
+void PrimitiveRenderer::drawCircle(  sf::Vector2f position, float radius,   sf::Color color) {
     sf::CircleShape circle(radius);
     circle.setPosition(position);
     circle.setFillColor(color);
     window.draw(circle);
 }
 
-void PrimitiveRenderer::drawLine(const sf::Vector2f point1, const sf::Vector2f point2, const sf::Color color) {
+void PrimitiveRenderer::drawLine(  sf::Vector2f point1,   sf::Vector2f point2,   sf::Color color) {
     sf::Vertex line[] = {
         sf::Vertex(point1, color),
         sf::Vertex(point2, color)
@@ -30,7 +31,7 @@ void PrimitiveRenderer::drawLine(const sf::Vector2f point1, const sf::Vector2f p
 
 
 
-void PrimitiveRenderer::drawLineInstrukcja(const sf::Vector2f startingPoint, const sf::Vector2f endPoint, const sf::Color color) {
+void PrimitiveRenderer::drawLineInstrukcja(  sf::Vector2f startingPoint,   sf::Vector2f endPoint,   sf::Color color) {
     float delta_x = std::abs(endPoint.x - startingPoint.x);
     float delta_y = std::abs(endPoint.y - startingPoint.y);
     sf::Vector2f currentPoint = startingPoint;
@@ -79,10 +80,22 @@ void PrimitiveRenderer::drawLineInstrukcja(const sf::Vector2f startingPoint, con
             else
                 currentPoint.y -= 1;
         }
+    }   
+}
+
+void PrimitiveRenderer::brokeLine(std::vector<sf::Vector2f> points, sf::Color color, bool closed)
+{
+    int i;
+    for (i = 1; i < points.size(); i++) {
+        drawLineInstrukcja(points[i-1], points[i], color);
     }
 
-    
+    if (closed) {
+        drawLineInstrukcja(points[0], points[i-1], color);
+    }
 
+}
 
-    
+void PrimitiveRenderer::drawCircleInstrukcja(sf::Vector2f point, sf::Color color) {
+
 }

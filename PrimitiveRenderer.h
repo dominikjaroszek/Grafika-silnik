@@ -1,13 +1,18 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <vector>
+
+class Point2D;
 
 class PrimitiveRenderer {
 public:
     PrimitiveRenderer(sf::RenderWindow& window);
-    void drawRectangle(const sf::Vector2f position, const sf::Vector2f size, const sf::Color color);
-    void drawCircle(const sf::Vector2f position, float radius, const sf::Color color);
-    void drawLine(const sf::Vector2f point1, const sf::Vector2f point2, const sf::Color color);
-    void drawLineInstrukcja(const sf::Vector2f point1, const sf::Vector2f point2, const sf::Color color);
+    void drawRectangle( sf::Vector2f position,   sf::Vector2f size,   sf::Color color);
+    void drawCircle( sf::Vector2f position, float radius,   sf::Color color);
+    void drawLine( sf::Vector2f point1,  sf::Vector2f point2,   sf::Color color);
+    void drawLineInstrukcja(  sf::Vector2f point1,   sf::Vector2f point2,   sf::Color color);
+    void brokeLine(std::vector<sf::Vector2f> points, sf::Color color, bool closed);
+    void drawCircleInstrukcja(sf::Vector2f point, sf::Color color);
 
 private:
     sf::RenderWindow& window;
