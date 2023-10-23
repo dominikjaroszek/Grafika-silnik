@@ -2,6 +2,7 @@
 #include <iostream>
 #include<vector>
 #include <cmath>
+#include <stack>
 
 PrimitiveRenderer::PrimitiveRenderer(sf::RenderWindow& window) : window(window) {
     // Konstruktor - implementacja, jeœli jest potrzebna
@@ -154,5 +155,53 @@ void PrimitiveRenderer::drawElipseInstrukcja(sf::Vector2f point, float Rx, float
         currentPoint.x = point.x - Rx * cos(a) + 0.5;
         currentPoint.y = point.y - Ry * sin(a) + 0.5;
         this->drawPoint(currentPoint, color);
+    }
+}
+
+
+void PrimitiveRenderer::boundryFill(sf::Vector2f point, sf::Color fillColor, sf::Color borderColor) {
+    std::stack<sf::Vector2f> DSD;
+    //sf::Color pixelColor;
+    DSD.push(point);
+
+
+    while (!DSD.empty()) {
+        sf::Vector2f P = DSD.top();
+        DSD.pop();
+
+        sf::Vector2u windowSize = window.getSize();
+        sf::Texture texture;
+        texture.create(windowSize.x, windowSize.y);
+        texture.update(window);
+        sf::Image screenshot = texture.copyToImage();
+        sf::Color pixelColor = screenshot.getPixel(P.x, P.y);
+
+        if (pixelColor == fillColor || pixelColor == borderColor)
+            continue;
+
+        this->drawPoint(P, fillColor);
+        
+        
+        // E
+        P.x += 1;
+        DSD.push(P);
+        
+        // W
+        P.x -= 2;
+        DSD.push(P);
+        
+        // N
+        P.x += 1;
+        P.y += 1;
+        DSD.push(P);
+
+        // S
+        P.y -= 2;
+        DSD.push(P);
+
+        
+
+
+
     }
 }
