@@ -1,6 +1,7 @@
 #include "PrimitiveRenderer.h"
 #include <iostream>
 #include<vector>
+#include <cmath>
 
 PrimitiveRenderer::PrimitiveRenderer(sf::RenderWindow& window) : window(window) {
     // Konstruktor - implementacja, jeœli jest potrzebna
@@ -28,6 +29,13 @@ void PrimitiveRenderer::drawLine(  sf::Vector2f point1,   sf::Vector2f point2,  
     window.draw(line, 2, sf::Lines);
 }
 
+void PrimitiveRenderer::drawPoint(sf::Vector2f point, sf::Color color) {
+    sf::Vector2f step = sf::Vector2f(1, 1);
+    sf::RectangleShape pixel(step);
+    pixel.setPosition(point);
+    pixel.setFillColor(color);
+    window.draw(pixel);
+}
 
 
 
@@ -35,8 +43,6 @@ void PrimitiveRenderer::drawLineInstrukcja(  sf::Vector2f startingPoint,   sf::V
     float delta_x = std::abs(endPoint.x - startingPoint.x);
     float delta_y = std::abs(endPoint.y - startingPoint.y);
     sf::Vector2f currentPoint = startingPoint;
-    sf::Vector2f step = sf::Vector2f(1, 1);
-    sf::RectangleShape pixel(step);
     float m = 0;
 
     if (delta_x > delta_y) {
@@ -44,9 +50,7 @@ void PrimitiveRenderer::drawLineInstrukcja(  sf::Vector2f startingPoint,   sf::V
         for (int i = 0; i <= delta_x; i++) {
             float temp = currentPoint.y;
             currentPoint.y = (int)currentPoint.y;
-            pixel.setPosition(currentPoint);
-            pixel.setFillColor(color);
-            window.draw(pixel);
+            this->drawPoint(currentPoint, color);
             currentPoint.y = temp;
 
             if (startingPoint.x < endPoint.x)
@@ -65,9 +69,8 @@ void PrimitiveRenderer::drawLineInstrukcja(  sf::Vector2f startingPoint,   sf::V
         for (int i = 0; i <= delta_y; i++) {
             float temp = currentPoint.x;
             currentPoint.x = (int)currentPoint.x;
-            pixel.setPosition(currentPoint);
-            pixel.setFillColor(color);
-            window.draw(pixel);
+            this->drawPoint(currentPoint, color);
+   
             currentPoint.x = temp;
 
             if (startingPoint.x < endPoint.x)
@@ -96,6 +99,8 @@ void PrimitiveRenderer::brokeLine(std::vector<sf::Vector2f> points, sf::Color co
 
 }
 
-void PrimitiveRenderer::drawCircleInstrukcja(sf::Vector2f point, sf::Color color) {
+void PrimitiveRenderer::drawCircleInstrukcja(sf::Vector2f point,float R, sf::Color color) {
+    
+
 
 }

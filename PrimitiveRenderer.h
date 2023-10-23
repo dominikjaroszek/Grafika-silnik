@@ -12,7 +12,8 @@ public:
     void drawLine( sf::Vector2f point1,  sf::Vector2f point2,   sf::Color color);
     void drawLineInstrukcja(  sf::Vector2f point1,   sf::Vector2f point2,   sf::Color color);
     void brokeLine(std::vector<sf::Vector2f> points, sf::Color color, bool closed);
-    void drawCircleInstrukcja(sf::Vector2f point, sf::Color color);
+    void drawCircleInstrukcja(sf::Vector2f point,float R, sf::Color color);
+    void drawPoint(sf::Vector2f point, sf::Color color);
 
 private:
     sf::RenderWindow& window;
