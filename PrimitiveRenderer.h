@@ -14,7 +14,7 @@ public:
     void brokeLine(std::vector<sf::Vector2f> points, sf::Color color, bool closed);
     void drawPoint(sf::Vector2f point, sf::Color color);
     void drawCircleInstrukcja(sf::Vector2f point,float R, sf::Color color);
-    void drawElipseInstrukcja();
+    void drawElipseInstrukcja(sf::Vector2f point, float Rx, float Ry, sf::Color color);
     
 
 private:

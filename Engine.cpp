@@ -110,7 +110,8 @@ void Engine::draw() {
 
     //primitiveRenderer.brokeLine(points, sf::Color::Green, 0);
 
-    primitiveRenderer.drawCircleInstrukcja(linePoint2,200, sf::Color::Red);
+    //primitiveRenderer.drawCircleInstrukcja(linePoint2,200, sf::Color::Red);
+    primitiveRenderer.drawElipseInstrukcja(linePoint2,300, 100, sf::Color::Red);
 
 
     

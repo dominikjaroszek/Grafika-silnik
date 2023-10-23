@@ -128,6 +128,31 @@ void PrimitiveRenderer::drawCircleInstrukcja(sf::Vector2f point,float R, sf::Col
 
 }
 
-void PrimitiveRenderer::drawElipseInstrukcja() {
+void PrimitiveRenderer::drawElipseInstrukcja(sf::Vector2f point, float Rx, float Ry, sf::Color color) {
+    sf::Vector2f currentPoint;
 
+    float step = -1;
+    if (Rx > Ry)
+        step = 1.0 / Rx;
+    else
+        step = 1.0 / Ry;
+
+    for (float a = 0; a < 1.5708; a += step) {
+
+        currentPoint.x = point.x + Rx * cos(a) + 0.5;
+        currentPoint.y = point.y - Ry * sin(a) + 0.5;
+        this->drawPoint(currentPoint, color);
+
+        currentPoint.x = point.x + Rx * cos(a) + 0.5;
+        currentPoint.y = point.y + Ry * sin(a) + 0.5;
+        this->drawPoint(currentPoint, color);
+
+        currentPoint.x = point.x - Rx * cos(a) + 0.5;
+        currentPoint.y = point.y + Ry * sin(a) + 0.5;
+        this->drawPoint(currentPoint, color);
+
+        currentPoint.x = point.x - Rx * cos(a) + 0.5;
+        currentPoint.y = point.y - Ry * sin(a) + 0.5;
+        this->drawPoint(currentPoint, color);
+    }
 }
