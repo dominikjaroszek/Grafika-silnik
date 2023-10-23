@@ -101,6 +101,33 @@ void PrimitiveRenderer::brokeLine(std::vector<sf::Vector2f> points, sf::Color co
 
 void PrimitiveRenderer::drawCircleInstrukcja(sf::Vector2f point,float R, sf::Color color) {
     
+    sf::Vector2f currentPoint;
+   
+    float step = 1.0 / R;
 
+    for (float a = 0; a < 1.5708; a += step) {
+
+        currentPoint.x = point.x + R * cos(a) + 0.5;
+        currentPoint.y = point.y - R * sin(a) + 0.5;
+        this->drawPoint(currentPoint, color);
+
+        currentPoint.x = point.x + R * cos(a) + 0.5;
+        currentPoint.y = point.y + R * sin(a) + 0.5;
+        this->drawPoint(currentPoint, color);
+
+        currentPoint.x = point.x - R * cos(a) + 0.5;
+        currentPoint.y = point.y + R * sin(a) + 0.5;
+        this->drawPoint(currentPoint, color);
+
+        currentPoint.x = point.x - R * cos(a) + 0.5;
+        currentPoint.y = point.y - R * sin(a) + 0.5;
+        this->drawPoint(currentPoint, color);
+    }
+
+
+
+}
+
+void PrimitiveRenderer::drawElipseInstrukcja() {
 
 }

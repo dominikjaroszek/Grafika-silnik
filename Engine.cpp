@@ -108,7 +108,9 @@ void Engine::draw() {
     points.push_back(linePoint6);
     points.push_back(linePoint2);
 
-    primitiveRenderer.brokeLine(points, sf::Color::Green, 0);
+    //primitiveRenderer.brokeLine(points, sf::Color::Green, 0);
+
+    primitiveRenderer.drawCircleInstrukcja(linePoint2,200, sf::Color::Red);
 
 
     
