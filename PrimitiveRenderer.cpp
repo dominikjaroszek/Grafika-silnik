@@ -4,6 +4,8 @@
 #include <cmath>
 #include <stack>
 
+
+
 PrimitiveRenderer::PrimitiveRenderer(sf::RenderWindow& window) : window(window) {
     // Konstruktor - implementacja, jeœli jest potrzebna
 }
@@ -180,16 +182,16 @@ void PrimitiveRenderer::boundryFill(sf::Vector2f point, sf::Color fillColor, sf:
             continue;
 
         this->drawPoint(P, fillColor);
-        
-        
+
+
         // E
         P.x += 1;
         DSD.push(P);
-        
+
         // W
         P.x -= 2;
         DSD.push(P);
-        
+
         // N
         P.x += 1;
         P.y += 1;
@@ -199,12 +201,12 @@ void PrimitiveRenderer::boundryFill(sf::Vector2f point, sf::Color fillColor, sf:
         P.y -= 2;
         DSD.push(P);
 
-        
 
 
 
+
+    }
 }
-
 bool PrimitiveRenderer::segmentsIntersect(LineSegment &A, LineSegment &B) {
     
     float x1 = A.getStart().getCoordinatesX(), y1 = A.getStart().getCoordinatesY();
