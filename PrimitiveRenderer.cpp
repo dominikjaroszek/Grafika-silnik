@@ -83,19 +83,76 @@ void PrimitiveRenderer::drawLineInstrukcja(  sf::Vector2f startingPoint,   sf::V
     }   
 }
 
-void PrimitiveRenderer::brokeLine(std::vector<sf::Vector2f> points, sf::Color color, bool closed)
+void PrimitiveRenderer::brokeLine(std::vector<Point2D> coordinates, sf::Color color, bool closed)
 {
     int i;
-    for (i = 1; i < points.size(); i++) {
-        drawLineInstrukcja(points[i-1], points[i], color);
+    for (i = 1; i < coordinates.size(); i++) {
+        drawLineInstrukcja(coordinates[i-1].getCoordinates(), coordinates[i].getCoordinates(), color);
     }
 
     if (closed) {
-        drawLineInstrukcja(points[0], points[i-1], color);
+        drawLineInstrukcja(coordinates[0].getCoordinates(), coordinates[i-1].getCoordinates(), color);
     }
 
 }
 
 void PrimitiveRenderer::drawCircleInstrukcja(sf::Vector2f point, sf::Color color) {
 
+}
+
+bool PrimitiveRenderer::segmentsIntersect(LineSegment &A, LineSegment &B) {
+    
+    float x1 = A.getStart().getCoordinatesX(), y1 = A.getStart().getCoordinatesY();
+    float x2 = A.getEnd().getCoordinatesX(), y2 = A.getEnd().getCoordinatesY();
+    float x3 = B.getStart().getCoordinatesX(), y3 = B.getStart().getCoordinatesY();
+    float x4 = B.getEnd().getCoordinatesX(), y4 = B.getEnd().getCoordinatesY();
+
+    
+    float s1 = x1 * (y3 - y4) + (y1 * (x4 - x3)) + ((x3 * y4) - (y3 * x4));
+    float s2 = (x2 * (y3 - y4)) + (y2 * (x4 - x3)) + ((x3 * y4) - (y3 * x4));
+    float s3 = (x3 * (y1 - y2)) + (y3 * (x2 - x1)) + ((x1 * y2) - (y1 * x2));
+    float s4 = (x4 * (y1 - y2)) + (y4 * (x2 - x1)) + ((x1 * y2) - (y1 * x2));
+
+
+    
+    if (s1 < 0.00 && s2>0.00 && s3 > 0.00 && s4 < 0.00 || s1 > 0.00 && s2 < 0.00 && s3 < 0.00 && s4 > 0.00) {
+        
+        return 1;
+    }
+    else {
+        // Odcinki nie przecinaj¹ siê
+        return 0;
+    }
+
+    return 0;
+}
+
+
+
+
+void PrimitiveRenderer::drawPolygon(std::vector<LineSegment>& lines, sf::Color color) {
+
+  
+    
+    
+
+    for (int i = 1; i < lines.size(); i++) {
+        for (int j = 0; j < i; j++) {
+            if (segmentsIntersect(lines[i], lines[j])) {
+                return;
+                
+            }
+        }
+    }
+    /*if (segmentsintersect(points[points.size() - 1], points[0], points[1], points[points.size() - 1])) {
+        return;*/
+    
+
+
+    // Narysuj wielok¹t
+    
+    for (int i = 0; i < lines.size(); i++) {
+        drawLine(lines[i].getStart().getCoordinates(), lines[i].getEnd().getCoordinates(), color);
+    }
+    
 }

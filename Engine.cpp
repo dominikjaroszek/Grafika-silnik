@@ -103,14 +103,54 @@ void Engine::draw() {
     line.draw(primitiveRenderer, sf::Color::Cyan, true);
 
 
-    std::vector<sf::Vector2f> points;
-    points.push_back(linePoint5);
-    points.push_back(linePoint6);
-    points.push_back(linePoint2);
+    std::vector<Point2D> points;
+   Point2D point1 = Point2D(0.0f, 0.0f);
+   Point2D point2 = Point2D(500.0f, 600.0f);
+   Point2D point3 = Point2D(400.0f, 400.0f);
+       
+    points.push_back(point1);
+    points.push_back(point2);
+    points.push_back(point3);
 
     primitiveRenderer.brokeLine(points, sf::Color::Green, 0);
 
+    std::vector<sf::Vector2f> invalidPolygonPoints = {
+    sf::Vector2f(100.0f, 100.0f),
+    sf::Vector2f(200.0f, 100.0f),
+    sf::Vector2f(200.0f, 200.0f),
+    sf::Vector2f(100.0f, 150.0f),
+    sf::Vector2f(300.0f, 110.0f)
+    };
+    
 
+    std::vector<LineSegment> lines;
+
+    Point2D start1(100.0f, 100.0f);
+    Point2D start2(200.0f, 100.0f);
+    Point2D start3(200.0f, 200.0f);
+    Point2D start4(100.0f, 150.0f);
+
+    lines.push_back(LineSegment(start1, start2));
+    lines.push_back(LineSegment(start2, start3));
+    lines.push_back(LineSegment(start3, start4));
+    lines.push_back(LineSegment(start4, start1));
+
+    /*std::vector<LineSegment> lines;
+
+    Point2D start1(100.0f, 100.0f);
+    Point2D start2(200.0f, 200.0f);
+
+    Point2D start3(100.0f, 200.0f);
+    Point2D start4(200.0f, 100.0f);
+
+    lines.push_back(LineSegment(start1, start2));
+    lines.push_back(LineSegment(start3, start4));*/
+
+    primitiveRenderer.drawPolygon(lines, sf::Color::Green);
+    //primitiveRenderer.drawLine(sf::Vector2f(200.0f, 100.0f),)
+   // primitiveRenderer.drawPolygon(invalidPolygonPoints, sf::Color::Green);
+    
+    //primitiveRenderer.brokeLine(invalidPolygonPoints, sf::Color::Green, 0);
     
 
 

@@ -1,8 +1,10 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include "LineSegment.h"
+#include "Point2D.h"
 
-class Point2D;
+class LineSegment;
 
 class PrimitiveRenderer {
 public:
@@ -11,9 +13,10 @@ public:
     void drawCircle( sf::Vector2f position, float radius,   sf::Color color);
     void drawLine( sf::Vector2f point1,  sf::Vector2f point2,   sf::Color color);
     void drawLineInstrukcja(  sf::Vector2f point1,   sf::Vector2f point2,   sf::Color color);
-    void brokeLine(std::vector<sf::Vector2f> points, sf::Color color, bool closed);
+    void brokeLine(std::vector<Point2D> points, sf::Color color, bool closed);
     void drawCircleInstrukcja(sf::Vector2f point, sf::Color color);
-
+    bool segmentsIntersect(LineSegment& A, LineSegment &B);
+    void drawPolygon(std::vector<LineSegment>& lines, sf::Color color);
 private:
     sf::RenderWindow& window;
 };
