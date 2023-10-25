@@ -4,8 +4,9 @@
 #include <fstream>
 #include <string>
 #include<vector>
+#include "Player.h"
 Engine::Engine() : initialized(false) {
-
+    
 }
 
 Engine::~Engine() {
@@ -22,6 +23,7 @@ void Engine::init(int screenWidth, int screenHeight, const std::string windowTit
         window.create(sf::VideoMode(screenWidth, screenHeight), windowTitle);
         window.setFramerateLimit(60);
         initialized = true;
+        
     }
 }
 
@@ -67,6 +69,7 @@ void Engine::handleInput() {
 
 void Engine::update() {
     // Aktualizacja logiki gry
+    
 }
 
 void Engine::clearScreen(const sf::Color color) {
@@ -77,12 +80,16 @@ void Engine::draw() {
    
     PrimitiveRenderer primitiveRenderer(window);
     Point2D point, start, stop;
+
+    
     
 
 
     sf::Vector2f position(100.0f, 100.0f);
     sf::Vector2f size(50.0f, 50.0f);
     sf::Color color(sf::Color::Red);
+
+    
 
     primitiveRenderer.drawRectangle(position, size, color);
 
@@ -177,6 +184,13 @@ void Engine::run() {
     sf::Clock clock;
     float deltaTime = 0.0f;
     
+    sf::Vector2f position(100.0f, 100.0f);
+
+    
+    Player player(window, position);
+      
+
+
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -184,10 +198,33 @@ void Engine::run() {
                 window.close();
         }
         deltaTime = clock.restart().asSeconds();
+        player.update();
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+            sf::Vector2f mv(5.0f, 0.0f);
+            player.move(mv);
+        }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+            sf::Vector2f mv(-5.0f, 0.0f);
+            player.move(mv);
+        }
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+            sf::Vector2f mv(5.0f, 0.0f);
+            player.move(mv);
+        }
+
+
+
         handleInput();
         update();
         draw();
         display();
+        window.clear();
+       
+
+        
+
     }
     
 }

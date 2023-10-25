@@ -22,6 +22,7 @@ public:
     void run();
     void run2b();
     sf::RenderWindow& getWindow();
+    
 
 private:
     sf::RenderWindow window;
