@@ -9,6 +9,7 @@ public:
     static Engine& getInstance();
 
     void init(int screenWidth, int screenHeight, const std::string windowTitle);
+    void init2b(int screenWidth, int screenHeight, const std::string windowTitle);
     void setFramesPerSecond(int fps);
     void setWindowSize(int width, int height);
     void setFullscreen(bool fullscreen);
@@ -19,10 +20,13 @@ public:
     void draw();
     void display();
     void run();
+    void run2b();
     sf::RenderWindow& getWindow();
 
 private:
     sf::RenderWindow window;
+    sf::RenderTexture buffer1;
+    sf::RenderTexture buffer2;
     bool initialized;
 
     Engine();

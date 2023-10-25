@@ -1,4 +1,4 @@
-#pragma onc
+#pragma once
 #include "GameObject.h"
 class UpdatableObject : public GameObject
 {
