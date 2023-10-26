@@ -141,6 +141,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Point2D.cpp" />
     <ClCompile Include="PrimitiveRenderer.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="ShapeObject.cpp" />
     <ClCompile Include="TransformableObject.cpp" />
     <ClCompile Include="UpdatableObject.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Point2D.h" />
     <ClInclude Include="PrimitiveRenderer.h" />
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="ShapeObject.h" />
     <ClInclude Include="TransformableObject.h" />
     <ClInclude Include="UpdatableObject.h" />

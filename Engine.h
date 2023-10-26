@@ -3,24 +3,26 @@
 #include "PrimitiveRenderer.h"
 #include "Point2D.h"
 #include "LineSegment.h"
+#include "Player.h"
+
 
 class Engine {
 public:
     static Engine& getInstance();
 
     void init(int screenWidth, int screenHeight, const std::string windowTitle);
-    void init2b(int screenWidth, int screenHeight, const std::string windowTitle);
+    //void init2b(int screenWidth, int screenHeight, const std::string windowTitle);
     void setFramesPerSecond(int fps);
     void setWindowSize(int width, int height);
     void setFullscreen(bool fullscreen);
     void enableMouseInput();
-    void handleInput();
-    void update();
+    void handleInput(Player& player);
+    void update(Player& player);
     void clearScreen(const sf::Color color);
     void draw();
     void display();
     void run();
-    void run2b();
+    //void run2b();
     sf::RenderWindow& getWindow();
     
 
@@ -29,6 +31,9 @@ private:
     sf::RenderTexture buffer1;
     sf::RenderTexture buffer2;
     bool initialized;
+    std::unique_ptr<Projectile> projectile;
+    std::vector<Projectile> projectiles;
+    
 
     Engine();
     ~Engine();
