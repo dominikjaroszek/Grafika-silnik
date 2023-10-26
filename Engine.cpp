@@ -170,7 +170,10 @@ void Engine::draw() {
     //primitiveRenderer.brokeLine(invalidPolygonPoints, sf::Color::Green, 0);
     
 
-
+    sf::Vector2f f1(0.0f, 500.0f);
+    sf::Vector2f f2(800.0f, 500.0f);
+    primitiveRenderer.drawLine(f1, f2, sf::Color::Green);
+    
 
 
 }
@@ -210,8 +213,8 @@ void Engine::run() {
         }
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-            sf::Vector2f mv(5.0f, 0.0f);
-            player.move(mv);
+            player.jump();
+           
         }
 
 
