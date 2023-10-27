@@ -3,13 +3,16 @@
 
 
 Projectile::Projectile(sf::RenderWindow& window, sf::Vector2f position, int direction) : window(window) {
-    if (!texture.loadFromFile("CharacterAssets/Idle (1).png")) {
+    if (!texture.loadFromFile("CharacterAssets/spear.png")) {
         std::cout << "Err";
     }
 
     sprite.setTexture(texture);
-    int newWidth = 30;
-    int newHeight = 30;
+    int newWidth = 100;
+    int newHeight = 50;
+    position = sf::Vector2f(position.x, position.y+20);
+    if (direction < 0)
+        newWidth *= -1;
     sprite.setScale(newWidth / sprite.getLocalBounds().width, newHeight / sprite.getLocalBounds().height);
     sprite.setPosition(position);
     sprite.setTexture(texture);
