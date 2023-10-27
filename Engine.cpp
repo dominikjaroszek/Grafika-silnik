@@ -58,25 +58,31 @@ void Engine::enableMouseInput() {
 }
 
 void Engine::handleInput(Player& player) {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         sf::Vector2f mv(5.0f, 0.0f);
         player.move(mv);
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         sf::Vector2f mv(-5.0f, 0.0f);
         player.move(mv);
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
         player.jump();
     }
 
   
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-        player.jump();
+        if (!projectile) {
+            projectile = std::make_unique<Projectile>(window, player.playerPosition());
+        }
+
+        if (projectile->projectableReady())
+            projectile = std::make_unique<Projectile>(window, player.playerPosition());
 
     }
+
     /*
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
         if (projectiles.size() < 52) {
@@ -94,15 +100,7 @@ void Engine::update(Player& player) {
     
     player.update();
     
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-        if (!projectile) {
-
-            projectile = std::make_unique<Projectile>(window, player.playerPosition());
-        }
-
-        if(projectile->projectableReady())
-            projectile = std::make_unique<Projectile>(window, player.playerPosition());
-    }
+    
 
     if (projectile)
         projectile->update();
