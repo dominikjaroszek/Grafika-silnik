@@ -3,7 +3,7 @@
 
 
 Projectile::Projectile(sf::RenderWindow& window, sf::Vector2f position) : window(window) {
-    if (!texture.loadFromFile("Idle.png")) {
+    if (!texture.loadFromFile("CharacterAssets/Idle (1).png")) {
         std::cout << "Err";
     }
 

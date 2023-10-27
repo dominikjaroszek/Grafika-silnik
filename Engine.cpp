@@ -61,6 +61,7 @@ void Engine::handleInput(Player& player) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         sf::Vector2f mv(5.0f, 0.0f);
         player.move(mv);
+        player.moveAnimation();
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
@@ -74,6 +75,7 @@ void Engine::handleInput(Player& player) {
 
   
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+
         if (!projectile) {
             projectile = std::make_unique<Projectile>(window, player.playerPosition());
         }
@@ -99,11 +101,13 @@ void Engine::handleInput(Player& player) {
 void Engine::update(Player& player) {
     
     player.update();
-    
-    
 
+    
+    
     if (projectile)
         projectile->update();
+    
+
     
 
    
@@ -238,8 +242,6 @@ void Engine::run() {
     sf::Vector2f position(100.0f, 100.0f);
 
     Player player(window, position);
-        
-   
 
     while (window.isOpen()) {
         sf::Event event;
@@ -247,6 +249,13 @@ void Engine::run() {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
+     
+        sf::Time elapsed = clock.getElapsedTime();
+
+        
+
+
+
         deltaTime = clock.restart().asSeconds();
 
         handleInput(player);

@@ -11,6 +11,8 @@ public:
 	void move(sf::Vector2f move);
 	sf::Vector2f playerPosition();
 	void jump();
+	void moveAnimation();
+	
 	
 	
 private:
@@ -19,5 +21,7 @@ private:
 	sf::Texture texture;
 	int gravity_speed;
 	float bottomY;
+	float animationIndex;
+	void updateAnimationIdle(int animationIndex);
 };
 
