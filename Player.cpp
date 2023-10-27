@@ -47,6 +47,17 @@ void Player::update() {
 
 void Player::move(sf::Vector2f move) {
     sprite.move(move);
+    if (move.x > 0) {
+        if(sprite.getScale().x<0)
+            sprite.move(sf::Vector2f(-50, 0));
+        sprite.setScale(100 / sprite.getLocalBounds().width, 100 / sprite.getLocalBounds().height);
+        
+    }
+    else {
+        if (sprite.getScale().x > 0)
+            sprite.move(sf::Vector2f(50, 0));
+        sprite.setScale(-100 / sprite.getLocalBounds().width, 100 / sprite.getLocalBounds().height);
+    }
 }
 
 
@@ -72,4 +83,11 @@ void Player::updateAnimationIdle(int animationIndex) {
 
 void Player::moveAnimation() {
 
+}
+
+int Player::getDirection(){
+    if (sprite.getScale().x < 0)
+        return -1;
+    else
+        return 1;
 }

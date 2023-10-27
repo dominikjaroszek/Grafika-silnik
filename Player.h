@@ -12,6 +12,7 @@ public:
 	sf::Vector2f playerPosition();
 	void jump();
 	void moveAnimation();
+	int getDirection();
 	
 	
 	

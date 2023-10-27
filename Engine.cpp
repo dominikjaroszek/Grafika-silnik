@@ -67,6 +67,7 @@ void Engine::handleInput(Player& player) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         sf::Vector2f mv(-5.0f, 0.0f);
         player.move(mv);
+        player.moveAnimation();
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
@@ -76,12 +77,15 @@ void Engine::handleInput(Player& player) {
   
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
 
+        int direction = player.getDirection();
+
+
         if (!projectile) {
-            projectile = std::make_unique<Projectile>(window, player.playerPosition());
+            projectile = std::make_unique<Projectile>(window, player.playerPosition(), direction);
         }
 
         if (projectile->projectableReady())
-            projectile = std::make_unique<Projectile>(window, player.playerPosition());
+            projectile = std::make_unique<Projectile>(window, player.playerPosition(), direction);
 
     }
 
