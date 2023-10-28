@@ -4,7 +4,7 @@ class Projectile : public UpdatableObject
 {
 public:
 	Projectile();
-	Projectile(sf::RenderWindow& window, sf::Vector2f position, int direction);
+	Projectile(sf::RenderWindow& window, sf::Vector2f position, int direction, bool moving);
 	void update();
 	bool projectableReady();
 	
@@ -14,6 +14,10 @@ private:
 	sf::RenderWindow& window;
 	sf::Texture texture;
 	int direction;
+	float speedHorizontal;
+	float speedVertical;
+	float decreaseVerticalSpeed;
+	
 
 };
 

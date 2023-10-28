@@ -12,6 +12,7 @@ public:
 	sf::Vector2f playerPosition();
 	void jump();
 	int getDirection();
+	bool isMovingHorizontal();
 	
 	
 	

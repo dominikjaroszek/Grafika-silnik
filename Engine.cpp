@@ -80,11 +80,11 @@ void Engine::handleInput(Player& player) {
         int direction = player.getDirection();
 
         if (!projectile) {
-            projectile = std::make_unique<Projectile>(window, player.playerPosition(), direction);
+            projectile = std::make_unique<Projectile>(window, player.playerPosition(), direction, player.isMovingHorizontal());
         }
 
         if (projectile->projectableReady())
-            projectile = std::make_unique<Projectile>(window, player.playerPosition(), direction);
+            projectile = std::make_unique<Projectile>(window, player.playerPosition(), direction, player.isMovingHorizontal());
 
     }
 

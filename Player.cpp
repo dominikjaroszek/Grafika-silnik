@@ -147,3 +147,7 @@ void Player::updateAnimationJump() {
     sprite.setTexture(texture);
 
 }
+
+bool Player::isMovingHorizontal() {
+    return isMovingX;
+}

@@ -2,7 +2,7 @@
 
 BitmapHandler::BitmapHandler(sf::RenderWindow& window): window(window) {
 
-	if (!bitmapImage.loadFromFile("CharacterAssets/map.bmp")) {
+	if (!bitmapImage.loadFromFile("MapAssets/map.bmp")) {
 		return;
 	}
 	texture.loadFromImage(bitmapImage);
