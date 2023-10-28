@@ -4,6 +4,7 @@
 #include "Point2D.h"
 #include "LineSegment.h"
 #include "Player.h"
+#include "BitmapHandler.h"
 
 
 class Engine {
@@ -17,7 +18,7 @@ public:
     void setFullscreen(bool fullscreen);
     void enableMouseInput();
     void handleInput(Player& player);
-    void update(Player& player);
+    void update(Player& player, BitmapHandler& bmp);
     void clearScreen(const sf::Color color);
     void draw();
     void display();

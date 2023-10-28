@@ -101,14 +101,17 @@ void Engine::handleInput(Player& player) {
 }
 
 
-void Engine::update(Player& player) {
+void Engine::update(Player& player, BitmapHandler &bmp) {
     
+
+    bmp.renderBitmap();
     player.update();
 
-    
-    
+  
     if (projectile)
         projectile->update();
+
+    
     
 
     
@@ -223,14 +226,14 @@ void Engine::draw() {
     //primitiveRenderer.brokeLine(invalidPolygonPoints, sf::Color::Green, 0);
     
 
-    sf::Vector2f f1(0.0f, 500.0f);
-    sf::Vector2f f2(800.0f, 500.0f);
-    primitiveRenderer.drawLine(f1, f2, sf::Color::Green);
+    sf::Vector2f f1(0.0f, 550.0f);
+    sf::Vector2f f2(800.0f, 550.0f);
+    //primitiveRenderer.drawLine(f1, f2, sf::Color::Green);
 
 
     
     sf::Vector2f c(600.0f, 200.0f);
-    primitiveRenderer.drawCircleInstrukcja(c, 150, sf::Color::Cyan);
+    primitiveRenderer.drawCircleInstrukcja(c, 10, sf::Color::Cyan);
     primitiveRenderer.boundryFill(c, sf::Color::Red, sf::Color::Cyan);
     
 
@@ -248,8 +251,10 @@ void Engine::run() {
     sf::Clock clock;
     float deltaTime = 0.0f;
     
-    sf::Vector2f position(100.0f, 100.0f);
 
+    BitmapHandler bitmapHandler(window);
+
+    sf::Vector2f position(100.0f, 500.0f);
     Player player(window, position);
 
     while (window.isOpen()) {
@@ -261,15 +266,14 @@ void Engine::run() {
      
         sf::Time elapsed = clock.getElapsedTime();
 
-        
-
-
-
+      
         deltaTime = clock.restart().asSeconds();
 
+        
         handleInput(player);
-        update(player);
+        update(player, bitmapHandler);
         draw();
+        
         display();
        
     }

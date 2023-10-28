@@ -12,8 +12,8 @@ Player::Player(sf::RenderWindow& window, sf::Vector2f position) : window(window)
     int newWidth = 100;
     int newHeight = 100;
     sprite.setScale(newWidth / sprite.getLocalBounds().width, newHeight / sprite.getLocalBounds().height);
-    sf::Vector2f loc(200.0f, 400.0f);
-    sprite.setPosition(loc);
+    std::cout << sprite.getGlobalBounds().height;
+    sprite.setPosition(sf::Vector2f(position.x, 400));
     sprite.setTexture(texture);
     gravity_speed = 1;
     IdleAnimationIndex = 1;
@@ -34,11 +34,12 @@ void Player::update() {
 
     sprite.setPosition(sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y + gravity_speed));
     
-    if (sprite.getPosition().y > 400) {
-        sprite.setPosition(sf::Vector2f(sprite.getPosition().x, 400)); 
+    if (sprite.getPosition().y > 460) {
+        sprite.setPosition(sf::Vector2f(sprite.getPosition().x, 460)); 
         gravity_speed = 0; 
     }
 
+    sprite.getGlobalBounds().getPosition().y;
     IdleAnimationIndex += 0.2;
     if (IdleAnimationIndex >= 15)
         IdleAnimationIndex = 1;
@@ -134,7 +135,7 @@ void Player::updateAnimationJump() {
 
     isMovingY = true;
 
-    JumpAnimationIndex += 0.2;
+    JumpAnimationIndex += 0.1;
     if (JumpAnimationIndex >= 15)
         JumpAnimationIndex = 1;
 

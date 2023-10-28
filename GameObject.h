@@ -5,6 +5,5 @@ class GameObject
 {
 private:
 	sf::Vector2f location;
-
 };
 
