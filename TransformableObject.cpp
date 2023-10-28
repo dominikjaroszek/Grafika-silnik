@@ -1,13 +1,14 @@
 #include "TransformableObject.h"
 
-void TransformableObject::translate() {
+void TransformableObject::translate(float dx, float dy) {
 
 }
 
-void TransformableObject::rotate() {
+void TransformableObject::rotate(float angle) {
 
 }
 
-void TransformableObject::scale() {
+void TransformableObject::scale(float factor) {
 
 }
+

@@ -33,3 +33,17 @@ void LineSegment::draw(PrimitiveRenderer& renderer, sf::Color color, bool increm
       
     }
 }
+void LineSegment::translate(float dx, float dy) {
+    startPoint.translate(dx, dy);
+    endPoint.translate(dx, dy);
+}
+
+void LineSegment::rotate(float angle) {
+    startPoint.rotate(angle);
+    endPoint.rotate(angle);
+}
+
+void LineSegment::scale(float factor) {
+    startPoint.scale(factor);
+    endPoint.scale(factor);
+}
