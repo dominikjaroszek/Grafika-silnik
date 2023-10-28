@@ -3,11 +3,12 @@
 #include <SFML/Graphics.hpp>
 #include "PrimitiveRenderer.h"
 #include "Point2D.h"
+#include "TransformableObject.h"
 
 class PrimitiveRenderer; // Deklaracja wstêpna klasy PrimitiveRenderer
 class Point2D; // Deklaracja wstêpna klasy Point2D
 
-class LineSegment {
+class LineSegment :public TransformableObject {
 public:
     LineSegment(Point2D& start, Point2D& end);
 
@@ -17,6 +18,9 @@ public:
     void setEnd(Point2D& newEnd);
 
     void draw(PrimitiveRenderer& renderer, sf::Color color, bool incrementalAlgorithm);
+    void translate(float dx, float dy) override;
+    void rotate(float angle) override;
+    void scale(float factor) override;
 
 private:
     Point2D& startPoint; // Zamiast referencji, u¿yj obiektów Point2D

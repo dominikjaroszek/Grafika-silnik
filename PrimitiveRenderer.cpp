@@ -163,54 +163,46 @@ void PrimitiveRenderer::drawElipseInstrukcja(sf::Vector2f point, float Rx, float
 
 
 void PrimitiveRenderer::boundryFill(sf::Vector2f point, sf::Color fillColor, sf::Color borderColor) {
+    const int windowWidth = 800;
+    const int windowHeight = 600;
 
-    sf::Vector2u windowSize = window.getSize();
+    if (point.x < 0 || point.x >= windowWidth || point.y < 0 || point.y >= windowHeight)
+        return;
+
     sf::Texture texture;
-    texture.create(windowSize.x, windowSize.y);
+    texture.create(windowWidth, windowHeight);
     texture.update(window);
     sf::Image screen = texture.copyToImage();
 
-
-    std::stack<sf::Vector2f> DSD;
-    sf::Color pixelColor;
-    DSD.push(point);
-
+    std::stack<sf::Vector2i> DSD;
+    DSD.push({ static_cast<int>(point.x), static_cast<int>(point.y) });
 
     while (!DSD.empty()) {
-        sf::Vector2f P = DSD.top();
+        sf::Vector2i P = DSD.top();
         DSD.pop();
 
-        if (P.x < 0 || P.x > 800 || P.y < 0 || P.y>600)
+        if (P.x < 0 || P.x >= windowWidth || P.y < 0 || P.y >= windowHeight)
             continue;
 
-        if (!window.isOpen())
-            return;
-        pixelColor = screen.getPixel(P.x, P.y);
-        
+        sf::Color pixelColor = screen.getPixel(P.x, P.y);
 
         if (pixelColor == fillColor || pixelColor == borderColor)
             continue;
 
-        this->drawPoint(P, fillColor);
-        screen.setPixel((int)P.x, (int)P.y, fillColor);
-
+        this->drawPoint(sf::Vector2f(P.x, P.y), fillColor);
+        screen.setPixel(P.x, P.y, fillColor);
 
         // E
-        P.x += 1;
-        DSD.push(P);
+        DSD.push({ P.x + 1, P.y });
 
         // W
-        P.x -= 2;
-        DSD.push(P);
+        DSD.push({ P.x - 1, P.y });
 
         // N
-        P.x += 1;
-        P.y += 1;
-        DSD.push(P);
+        DSD.push({ P.x, P.y + 1 });
 
         // S
-        P.y -= 2;
-        DSD.push(P);
+        DSD.push({ P.x, P.y - 1 });
     }
 
 }

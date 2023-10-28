@@ -170,9 +170,14 @@ void Engine::draw() {
     stop.setCoordinates(500.0, 200.0);
 
     LineSegment line(start,stop);
-    line.draw(primitiveRenderer, sf::Color::Cyan, true);
-
-
+    line.draw(primitiveRenderer, sf::Color::Magenta, true);
+    line.translate(30, 80);
+    line.draw(primitiveRenderer, sf::Color::Magenta, true);
+    //line.rotate(30);
+    line.scale(3);
+    line.draw(primitiveRenderer, sf::Color::Magenta, false);
+    line.rotate(0.1);
+    line.draw(primitiveRenderer, sf::Color::Magenta, false);
     std::vector<Point2D> points;
    Point2D point1 = Point2D(0.0f, 0.0f);
    Point2D point2 = Point2D(500.0f, 600.0f);
@@ -233,7 +238,7 @@ void Engine::draw() {
     primitiveRenderer.drawCircleInstrukcja(c, 150, sf::Color::Cyan);
     primitiveRenderer.boundryFill(c, sf::Color::Red, sf::Color::Cyan);
     
-
+    
 
 }
 
