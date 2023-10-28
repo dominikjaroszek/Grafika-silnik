@@ -226,6 +226,12 @@ void Engine::draw() {
     sf::Vector2f f1(0.0f, 500.0f);
     sf::Vector2f f2(800.0f, 500.0f);
     primitiveRenderer.drawLine(f1, f2, sf::Color::Green);
+
+
+    
+    sf::Vector2f c(600.0f, 200.0f);
+    primitiveRenderer.drawCircleInstrukcja(c, 150, sf::Color::Cyan);
+    primitiveRenderer.boundryFill(c, sf::Color::Red, sf::Color::Cyan);
     
 
 

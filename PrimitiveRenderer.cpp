@@ -3,6 +3,7 @@
 #include<vector>
 #include <cmath>
 #include <stack>
+#include <set>
 
 
 
@@ -162,8 +163,16 @@ void PrimitiveRenderer::drawElipseInstrukcja(sf::Vector2f point, float Rx, float
 
 
 void PrimitiveRenderer::boundryFill(sf::Vector2f point, sf::Color fillColor, sf::Color borderColor) {
+
+    sf::Vector2u windowSize = window.getSize();
+    sf::Texture texture;
+    texture.create(windowSize.x, windowSize.y);
+    texture.update(window);
+    sf::Image screen = texture.copyToImage();
+
+
     std::stack<sf::Vector2f> DSD;
-    //sf::Color pixelColor;
+    sf::Color pixelColor;
     DSD.push(point);
 
 
@@ -171,17 +180,19 @@ void PrimitiveRenderer::boundryFill(sf::Vector2f point, sf::Color fillColor, sf:
         sf::Vector2f P = DSD.top();
         DSD.pop();
 
-        sf::Vector2u windowSize = window.getSize();
-        sf::Texture texture;
-        texture.create(windowSize.x, windowSize.y);
-        texture.update(window);
-        sf::Image screenshot = texture.copyToImage();
-        sf::Color pixelColor = screenshot.getPixel(P.x, P.y);
+        if (P.x < 0 || P.x > 800 || P.y < 0 || P.y>600)
+            continue;
+
+        if (!window.isOpen())
+            return;
+        pixelColor = screen.getPixel(P.x, P.y);
+        
 
         if (pixelColor == fillColor || pixelColor == borderColor)
             continue;
 
         this->drawPoint(P, fillColor);
+        screen.setPixel((int)P.x, (int)P.y, fillColor);
 
 
         // E
@@ -200,13 +211,10 @@ void PrimitiveRenderer::boundryFill(sf::Vector2f point, sf::Color fillColor, sf:
         // S
         P.y -= 2;
         DSD.push(P);
-
-
-
-
-
     }
+
 }
+
 bool PrimitiveRenderer::segmentsIntersect(LineSegment &A, LineSegment &B) {
     
     float x1 = A.getStart().getCoordinatesX(), y1 = A.getStart().getCoordinatesY();

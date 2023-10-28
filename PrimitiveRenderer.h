@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <set>
 #include "LineSegment.h"
 #include "Point2D.h"
 
@@ -15,7 +16,7 @@ public:
     void drawLineInstrukcja(  sf::Vector2f point1,   sf::Vector2f point2,   sf::Color color);
     void drawPoint(sf::Vector2f point, sf::Color color);
     void drawElipseInstrukcja(sf::Vector2f point, float Rx, float Ry, sf::Color color);
-    void boundryFill(sf::Vector2f point, sf::Color color, sf::Color borderColor);
+    void boundryFill(sf::Vector2f point, sf::Color fillColor, sf::Color borderColor);
     void brokeLine(std::vector<Point2D> points, sf::Color color, bool closed);
     void drawCircleInstrukcja(sf::Vector2f point, float R, sf::Color color);
     bool segmentsIntersect(LineSegment& A, LineSegment& B);
