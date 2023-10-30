@@ -24,12 +24,12 @@ Projectile::Projectile(sf::RenderWindow& window, sf::Vector2f position, int dire
     sprite.setPosition(position);
     sprite.setTexture(texture);
     this->direction = direction;
-    speedHorizontal = 13;
+    speedHorizontal = 15;
     speedVertical = 0;
     decreaseVerticalSpeed = 1;
 
     if (moving)
-        speedHorizontal += 10;
+        speedHorizontal += 5;
   
    
 }

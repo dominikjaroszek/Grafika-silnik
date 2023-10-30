@@ -23,6 +23,7 @@ Player::Player(sf::RenderWindow& window, sf::Vector2f position) : window(window)
     isMovingX = false;
     isMovingY = false;
     lastPos = sf::Vector2f(0, 0);
+    jumpHeight = 0;
  
 }
 
@@ -99,8 +100,10 @@ void Player::move(sf::Vector2f move) {
 
 
 void Player::jump() {
-    if(sprite.getPosition().y >= 400)
-        this->gravity_speed = -20;
+    if (sprite.getPosition().y >= 400) {
+        this->gravity_speed = -10 - jumpHeight;
+        jumpHeight = 0;
+    }
 }
 
 
@@ -150,4 +153,9 @@ void Player::updateAnimationJump() {
 
 bool Player::isMovingHorizontal() {
     return isMovingX;
+}
+
+void Player::addJumpHeight() {
+    if(jumpHeight<12)
+      this->jumpHeight += 1.25;
 }
