@@ -17,6 +17,7 @@ public:
     void drawPoint(sf::Vector2f point, sf::Color color);
     void drawElipseInstrukcja(sf::Vector2f point, float Rx, float Ry, sf::Color color);
     void boundryFill(sf::Vector2f point, sf::Color fillColor, sf::Color borderColor);
+    void floodFill(sf::Vector2f point, sf::Color fillColor);
     void brokeLine(std::vector<Point2D> points, sf::Color color, bool closed);
     void drawCircleInstrukcja(sf::Vector2f point, float R, sf::Color color);
     bool segmentsIntersect(LineSegment& A, LineSegment& B);
