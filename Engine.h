@@ -17,7 +17,7 @@ public:
     void setWindowSize(int width, int height);
     void setFullscreen(bool fullscreen);
     void enableMouseInput();
-    void handleInput(Player& player, sf::Event &event, bool &keyReleased);
+    void handleInput(Player& player);
     void update(Player& player, BitmapHandler& bmp);
     void clearScreen(const sf::Color color);
     void draw();

@@ -57,9 +57,7 @@ void Engine::enableMouseInput() {
     }
 }
 
-void Engine::handleInput(Player& player,sf::Event &event, bool &keyReleased) {
-    
-
+void Engine::handleInput(Player& player) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         sf::Vector2f mv(5.0f, 0.0f);
         player.move(mv);
@@ -73,18 +71,8 @@ void Engine::handleInput(Player& player,sf::Event &event, bool &keyReleased) {
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-        player.addJumpHeight();
-        keyReleased = false;
+        player.jump();
     }
-
-     
-    if (event.type == sf::Event::KeyReleased) {
-        if ((event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::Up) && !keyReleased) {
-            player.jump();
-            keyReleased = true;
-        }
-    }
-  
 
   
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
@@ -99,17 +87,44 @@ void Engine::handleInput(Player& player,sf::Event &event, bool &keyReleased) {
             projectile = std::make_unique<Projectile>(window, player.playerPosition(), direction, player.isMovingHorizontal());
 
     }
+
+    /*
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+        if (projectiles.size() < 52) {
+            Projectile pro(window, player.playerPosition());
+            projectiles.push_back(pro);
+        }
+       
+        }
+    */
  
 }
 
 
 void Engine::update(Player& player, BitmapHandler &bmp) {
     
+
     bmp.renderBitmap();
     player.update();
 
+  
     if (projectile)
         projectile->update();
+
+    
+    
+
+    
+
+   
+   /*
+    for (int i = 0; i < projectiles.size(); i++) {
+        projectiles[i].update();
+
+   }
+
+    */
+   
 
 }
 
@@ -246,9 +261,6 @@ void Engine::run() {
 
     sf::Vector2f position(100.0f, 500.0f);
     Player player(window, position);
-    sf::Event event {};
-    bool keyRelesed = false;
-    
 
     while (window.isOpen()) {
         sf::Event event;
@@ -263,7 +275,7 @@ void Engine::run() {
         deltaTime = clock.restart().asSeconds();
 
         
-        handleInput(player, event, keyRelesed);
+        handleInput(player);
         update(player, bitmapHandler);
         draw();
         

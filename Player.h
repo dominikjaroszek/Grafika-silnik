@@ -13,7 +13,7 @@ public:
 	void jump();
 	int getDirection();
 	bool isMovingHorizontal();
-	void addJumpHeight();
+	
 	
 	
 	
@@ -32,7 +32,6 @@ private:
 	void updateAnimationIdle();
 	void updateAnimationJump();
 	void updateAnimationWalk();
-	int jumpHeight;
 	
 };
 
