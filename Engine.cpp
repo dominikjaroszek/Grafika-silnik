@@ -77,10 +77,9 @@ void Engine::handleInput(Player& player,sf::Event &event, bool &keyReleased) {
         keyReleased = false;
     }
 
-
+     
     if (event.type == sf::Event::KeyReleased) {
-        if (event.key.code == sf::Keyboard::W && !keyReleased) {
-            // Key A was released
+        if ((event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::Up) && !keyReleased) {
             player.jump();
             keyReleased = true;
         }

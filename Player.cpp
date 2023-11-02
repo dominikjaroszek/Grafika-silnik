@@ -9,7 +9,7 @@ Player::Player(sf::RenderWindow& window, sf::Vector2f position) : window(window)
     }
 
     sprite.setTexture(texture);
-    int newWidth = 100;
+    int newWidth = 10;
     int newHeight = 100;
     sprite.setScale(newWidth / sprite.getLocalBounds().width, newHeight / sprite.getLocalBounds().height);
     std::cout << sprite.getGlobalBounds().height;
