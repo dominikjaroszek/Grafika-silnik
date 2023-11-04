@@ -10,10 +10,15 @@ public:
 	void update() override;
 	void move(sf::Vector2f move);
 	sf::Vector2f playerPosition();
+	sf::FloatRect playerSize();
 	void jump();
 	int getDirection();
 	bool isMovingHorizontal();
-	
+	void playerSetPosition();
+	sf::Vector2f lastPosition;
+	bool collisionY;
+	bool isJumping;
+
 	
 	
 	

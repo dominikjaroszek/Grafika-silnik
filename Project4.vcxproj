@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BitmapHandler.cpp" />
+    <ClCompile Include="CollissionsDetection.cpp" />
     <ClCompile Include="DrawableObject.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -149,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BitmapHandler.h" />
+    <ClInclude Include="CollissionsDetection.h" />
     <ClInclude Include="DrawableObject.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="GameObject.h" />

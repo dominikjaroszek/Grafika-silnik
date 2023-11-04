@@ -57,21 +57,59 @@ void Engine::enableMouseInput() {
     }
 }
 
-void Engine::handleInput(Player& player) {
+void Engine::handleInput(Player& player, BitmapHandler& bmp, CollissionsDetection &collissionsDetection) {
+
+    float playerX = player.playerPosition().x;
+    float playerY = player.playerPosition().y;
+    float playerW = player.playerSize().width;
+    float playerH = player.playerSize().height;
+
+    float textureX = bmp.getSize().getPosition().x;
+    float textureY = bmp.getSize().getPosition().y;
+    float textureW = bmp.getSize().width;
+    float textureH = bmp.getSize().height;
+   
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         sf::Vector2f mv(5.0f, 0.0f);
-        player.move(mv);
+        
+        if(collissionsDetection.playerCollisions(player)!=1){
+            //player.lastPosition = player.playerPosition();
+            
+            player.move(mv);
+            }
+        else {
+            std::cout << "player x y w h" << playerX << " " << playerY << " " << playerW << " " << playerH << std::endl;
+            std::cout << "texture x y w h" << textureX << " " << textureY << " " << textureW << " " << textureH << std::endl;
+        }
+        //else
+           // player.playerSetPosition();
        
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         sf::Vector2f mv(-5.0f, 0.0f);
-        player.move(mv);
+       // player.lastPosition = player.playerPosition();
+        if (collissionsDetection.playerCollisions(player)!=2) {
+            //player.lastPosition = player.playerPosition();
+            player.move(mv);
+        }
+        else {
+            std::cout << "player x y w h" << playerX << " " << playerY << " " << playerW << " " << playerH << std::endl;
+            std::cout << "texture x y w h" << textureX << " " << textureY << " " << textureW << " " << textureH << std::endl;
+        }
+            //player.playerSetPosition(); */
    
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-        player.jump();
+        //player.lastPosition = player.playerPosition();
+        //if (collissionsDetection.playerCollisions(player)!=3) {
+            //player.lastPosition = player.playerPosition();
+            player.jump();
+       /* }
+        else {
+            player.playerSetPosition();
+        }*/
     }
 
   
@@ -101,10 +139,22 @@ void Engine::handleInput(Player& player) {
 }
 
 
-void Engine::update(Player& player, BitmapHandler &bmp) {
+void Engine::update(Player& player, BitmapHandler &bmp, CollissionsDetection& collissionsDetection) {
     
-
+    player.lastPosition = player.playerPosition();
     bmp.renderBitmap();
+    if (collissionsDetection.playerCollisions(player) == 3) {
+        //player.collisionY = 1;
+        //std::cout << collissionsDetection.playerCollisions(player)/*"kolizja"*/<<std::endl;
+        player.collisionY = true;
+        player.playerSetPosition();
+    }
+    else
+        //player.collisionY = 2;
+        //std::cout << collissionsDetection.playerCollisions(player)/* "brak kolizji"*/<<std::endl;
+        player.collisionY = false;
+
+
     player.update();
 
   
@@ -258,8 +308,10 @@ void Engine::run() {
     
 
     BitmapHandler bitmapHandler(window);
+    CollissionsDetection collissionsDetection(bitmapHandler);
+    
 
-    sf::Vector2f position(100.0f, 500.0f);
+    sf::Vector2f position(700.0f, 500.0f);
     Player player(window, position);
 
     while (window.isOpen()) {
@@ -275,8 +327,8 @@ void Engine::run() {
         deltaTime = clock.restart().asSeconds();
 
         
-        handleInput(player);
-        update(player, bitmapHandler);
+        handleInput(player,bitmapHandler, collissionsDetection);
+        update(player, bitmapHandler, collissionsDetection);
         draw();
         
         display();

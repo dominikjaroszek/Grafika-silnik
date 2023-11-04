@@ -30,8 +30,10 @@ void Player::update() {
     
     bottomY = sprite.getPosition().y + sprite.getLocalBounds().height;
 
-    gravity_speed += 1;
-
+    if (collisionY)
+        gravity_speed = 0;
+    else
+        gravity_speed += 1;
     sprite.setPosition(sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y + gravity_speed));
     
     if (sprite.getPosition().y > 460) {
@@ -73,6 +75,11 @@ sf::Vector2f Player::playerPosition() {
 
 }
 
+sf::FloatRect Player::playerSize() {
+    return sprite.getGlobalBounds();
+
+}
+
 int Player::getDirection() {
     if (sprite.getScale().x < 0)
         return -1;
@@ -99,6 +106,7 @@ void Player::move(sf::Vector2f move) {
 
 
 void Player::jump() {
+    
     if(sprite.getPosition().y >= 400)
         this->gravity_speed = -20;
 }
@@ -150,4 +158,8 @@ void Player::updateAnimationJump() {
 
 bool Player::isMovingHorizontal() {
     return isMovingX;
+}
+
+void Player::playerSetPosition() {
+    sprite.setPosition(lastPosition);
 }

@@ -5,6 +5,7 @@
 #include "LineSegment.h"
 #include "Player.h"
 #include "BitmapHandler.h"
+#include "CollissionsDetection.h"
 
 
 class Engine {
@@ -17,8 +18,8 @@ public:
     void setWindowSize(int width, int height);
     void setFullscreen(bool fullscreen);
     void enableMouseInput();
-    void handleInput(Player& player);
-    void update(Player& player, BitmapHandler& bmp);
+    void handleInput(Player& player, BitmapHandler& bmp, CollissionsDetection &collissionsDetection);
+    void update(Player& player, BitmapHandler& bmp, CollissionsDetection& collissionsDetection);
     void clearScreen(const sf::Color color);
     void draw();
     void display();
