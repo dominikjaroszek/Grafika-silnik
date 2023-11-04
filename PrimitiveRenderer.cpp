@@ -207,6 +207,53 @@ void PrimitiveRenderer::boundryFill(sf::Vector2f point, sf::Color fillColor, sf:
 
 }
 
+void PrimitiveRenderer::floodFill(sf::Vector2f point, sf::Color fillColor) {
+    const int windowWidth = 800;
+    const int windowHeight = 600;
+
+    if (point.x < 0 || point.x >= windowWidth || point.y < 0 || point.y >= windowHeight)
+        return;
+
+    sf::Texture texture;
+    texture.create(windowWidth, windowHeight);
+    texture.update(window);
+    sf::Image screen = texture.copyToImage();
+
+    std::stack<sf::Vector2i> DSD;
+    DSD.push({ static_cast<int>(point.x), static_cast<int>(point.y) });
+    sf::Color backgroundColor = screen.getPixel(point.x, point.y);
+
+    while (!DSD.empty()) {
+        sf::Vector2i P = DSD.top();
+        DSD.pop();
+
+        if (P.x < 0 || P.x >= windowWidth || P.y < 0 || P.y >= windowHeight)
+            continue;
+
+        sf::Color pixelColor = screen.getPixel(P.x, P.y);
+
+        if (pixelColor == fillColor || pixelColor != backgroundColor)
+            continue;
+
+        this->drawPoint(sf::Vector2f(P.x, P.y), fillColor);
+        screen.setPixel(P.x, P.y, fillColor);
+
+        // E
+        DSD.push({ P.x + 1, P.y });
+
+        // W
+        DSD.push({ P.x - 1, P.y });
+
+        // N
+        DSD.push({ P.x, P.y + 1 });
+
+        // S
+        DSD.push({ P.x, P.y - 1 });
+    }
+
+}
+
+
 bool PrimitiveRenderer::segmentsIntersect(LineSegment &A, LineSegment &B) {
     
     float x1 = A.getStart().getCoordinatesX(), y1 = A.getStart().getCoordinatesY();
