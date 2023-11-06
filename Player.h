@@ -16,7 +16,8 @@ public:
 	bool isMovingHorizontal();
 	void playerSetPosition();
 	sf::Vector2f lastPosition;
-	bool collisionY;
+	bool collisionTopY;
+	bool collisionBottomY;
 	bool isJumping;
 
 	

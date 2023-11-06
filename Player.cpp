@@ -9,7 +9,7 @@ Player::Player(sf::RenderWindow& window, sf::Vector2f position) : window(window)
     }
 
     sprite.setTexture(texture);
-    int newWidth = 10;
+    int newWidth = 100;
     int newHeight = 100;
     sprite.setScale(newWidth / sprite.getLocalBounds().width, newHeight / sprite.getLocalBounds().height);
     std::cout << sprite.getGlobalBounds().height;
@@ -30,10 +30,16 @@ void Player::update() {
     
     bottomY = sprite.getPosition().y + sprite.getLocalBounds().height;
 
-    if (collisionY)
+    if (collisionTopY)
         gravity_speed = 0;
     else
         gravity_speed += 1;
+   
+    if (collisionBottomY) {
+        gravity_speed = 1;
+    }
+    
+
     sprite.setPosition(sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y + gravity_speed));
     
     if (sprite.getPosition().y > 460) {
@@ -107,8 +113,13 @@ void Player::move(sf::Vector2f move) {
 
 void Player::jump() {
     
-    if(sprite.getPosition().y >= 400)
+    if(sprite.getPosition().y >= 100)
         this->gravity_speed = -20;
+
+    if (collisionTopY) {
+        sprite.setPosition(sprite.getPosition().x, sprite.getPosition().y - 10);
+        gravity_speed = -20;
+    }
 }
 
 

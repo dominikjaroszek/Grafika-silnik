@@ -77,10 +77,10 @@ void Engine::handleInput(Player& player, BitmapHandler& bmp, CollissionsDetectio
             
             player.move(mv);
             }
-        else {
+        /*else {
             std::cout << "player x y w h" << playerX << " " << playerY << " " << playerW << " " << playerH << std::endl;
             std::cout << "texture x y w h" << textureX << " " << textureY << " " << textureW << " " << textureH << std::endl;
-        }
+        }*/
         //else
            // player.playerSetPosition();
        
@@ -93,10 +93,10 @@ void Engine::handleInput(Player& player, BitmapHandler& bmp, CollissionsDetectio
             //player.lastPosition = player.playerPosition();
             player.move(mv);
         }
-        else {
+       /* else {
             std::cout << "player x y w h" << playerX << " " << playerY << " " << playerW << " " << playerH << std::endl;
             std::cout << "texture x y w h" << textureX << " " << textureY << " " << textureW << " " << textureH << std::endl;
-        }
+        }*/
             //player.playerSetPosition(); */
    
     }
@@ -143,17 +143,29 @@ void Engine::update(Player& player, BitmapHandler &bmp, CollissionsDetection& co
     
     player.lastPosition = player.playerPosition();
     bmp.renderBitmap();
+
+    if (collissionsDetection.playerCollisions(player) == 4) {
+        player.collisionBottomY = true;
+    }
+    else {
+        player.collisionBottomY = false;
+    }
+
     if (collissionsDetection.playerCollisions(player) == 3) {
         //player.collisionY = 1;
         //std::cout << collissionsDetection.playerCollisions(player)/*"kolizja"*/<<std::endl;
-        player.collisionY = true;
+        player.collisionTopY = true;
         player.playerSetPosition();
     }
     else
         //player.collisionY = 2;
         //std::cout << collissionsDetection.playerCollisions(player)/* "brak kolizji"*/<<std::endl;
-        player.collisionY = false;
+        player.collisionTopY = false;
+    if(collissionsDetection.playerCollisions(player))
+        std::cout << collissionsDetection.playerCollisions(player)<< player.collisionTopY/*"kolizja"*/ << std::endl;
 
+
+    
 
     player.update();
 

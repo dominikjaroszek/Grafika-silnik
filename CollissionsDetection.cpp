@@ -57,9 +57,11 @@ int CollissionsDetection::playerCollisions(Player& player) {
 	return 5;
 	
 	player.playerPosition().y > bitmap.getSize().getPosition().y + bitmap.getSize().height  player.playerPosition().y + player.playerSize().height > bitmap.getSize().getPosition().y)*/
-	if (playerY + playerH +1> textureY && (playerX > textureX && playerX < textureX + textureW)) {
-
-		return 3;
+	if (playerY + playerH +1> textureY && playerY<textureY+textureH+20 && (playerX > textureX && playerX < textureX + textureW)) {
+		if (playerY < textureY + textureH && (playerX > textureX && playerX < textureX + textureW))
+			return 3;
+		else
+			return 4;
 	}
 	if (playerX+ playerW/2 + 5 > textureX && playerX < textureX + textureW && (playerY<textureY+textureH && playerY+playerH>textureY)) {
 		

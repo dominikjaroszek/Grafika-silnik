@@ -34,7 +34,7 @@ void BitmapHandler::renderBitmap() {
 	);
 
 	//back.move(sf::Vector2f(3.0f, 2.0f));
-	back.setPosition(sf::Vector2f(200.0f, 450.0f));
+	back.setPosition(sf::Vector2f(200.0f, 50.0f));
 
 	//back.setOrigin(sf::Vector2f(back.getLocalBounds().width, back.getLocalBounds().height));
 	
