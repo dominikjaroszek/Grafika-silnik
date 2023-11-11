@@ -140,6 +140,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="LineSegment.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MapData.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Point2D.cpp" />
     <ClCompile Include="PrimitiveRenderer.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="Engine.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="LineSegment.h" />
+    <ClInclude Include="MapData.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Point2D.h" />
     <ClInclude Include="PrimitiveRenderer.h" />

@@ -15,10 +15,12 @@ public:
 	int getDirection();
 	bool isMovingHorizontal();
 	void playerSetPosition();
+	void playerSetPosition(sf::Vector2f pos);
 	sf::Vector2f lastPosition;
 	bool collisionTopY;
 	bool collisionBottomY;
 	bool isJumping;
+	int getMapIndex();
 
 	
 	
@@ -38,6 +40,7 @@ private:
 	void updateAnimationIdle();
 	void updateAnimationJump();
 	void updateAnimationWalk();
+	int mapIndex;
 	
 };
 
