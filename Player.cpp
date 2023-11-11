@@ -43,10 +43,10 @@ void Player::update() {
 
     sprite.setPosition(sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y + gravity_speed));
     
-    if (sprite.getPosition().y > 460) {
-        sprite.setPosition(sf::Vector2f(sprite.getPosition().x, 460)); 
-        gravity_speed = 0; 
-    }
+  //  if (sprite.getPosition().y > 460) {
+ //       sprite.setPosition(sf::Vector2f(sprite.getPosition().x, 460)); 
+ //       gravity_speed = 0; 
+  //  }
 
     sprite.getGlobalBounds().getPosition().y;
     IdleAnimationIndex += 0.2;

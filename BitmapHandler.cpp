@@ -8,11 +8,19 @@ BitmapHandler::BitmapHandler(sf::RenderWindow& window): window(window) {
 	}
 	texture.loadFromImage(bitmapImage);
 	
-	if (!bitmapImageBack.loadFromFile("MapAssets/nwm.png")) {
+	if (!bitmapImageFloor.loadFromFile("MapAssets/platform_floor.png")) {
 		return;
 	}
-	textureBack.loadFromImage(bitmapImageBack);
+	textureFloor.loadFromImage(bitmapImageFloor);
 	
+	sprite.setTexture(texture);
+	floor.setTexture(textureFloor);
+	sprite.setScale(
+		static_cast<float>(window.getSize().x) / sprite.getLocalBounds().width,
+		static_cast<float>(window.getSize().y) / sprite.getLocalBounds().height
+	);
+
+	floor.setPosition(sf::Vector2f(0,550));
 
 	this->renderBitmap();
 
@@ -21,20 +29,14 @@ BitmapHandler::BitmapHandler(sf::RenderWindow& window): window(window) {
 }
 
 void BitmapHandler::renderBitmap() {
-	sf::Sprite sprite(texture);
 	
-	sprite.setScale(
-		static_cast<float>(window.getSize().x) / sprite.getLocalBounds().width,
-		static_cast<float>(window.getSize().y) / sprite.getLocalBounds().height
-	);
-
 	window.draw(sprite);	
-	
+	window.draw(floor);
 }
 
 
 
 sf::FloatRect BitmapHandler::getSize() {
-	return back.getGlobalBounds();
+	return floor.getGlobalBounds();
 }
 

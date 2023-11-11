@@ -13,11 +13,12 @@ private:
 	sf::RenderWindow& window;
 	sf::Image bitmapImage;
 	sf::Texture texture;
+	sf::Sprite sprite;
 
 
-	sf::Image bitmapImageBack;
-	sf::Texture textureBack;
-	sf::Sprite back;
+	sf::Image bitmapImageFloor;
+	sf::Texture textureFloor;
+	sf::Sprite floor;
 
 };
 
