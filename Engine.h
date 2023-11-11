@@ -6,6 +6,8 @@
 #include "Player.h"
 #include "BitmapHandler.h"
 #include "CollissionsDetection.h"
+#include "Enemy.h"
+#include "MapHandler.h"
 
 
 class Engine {
@@ -19,7 +21,7 @@ public:
     void setFullscreen(bool fullscreen);
     void enableMouseInput();
     void handleInput(Player& player, BitmapHandler& bmp, CollissionsDetection &collissionsDetection);
-    void update(Player& player, BitmapHandler& bmp, CollissionsDetection& collissionsDetection);
+    void update(Player& player, BitmapHandler& bmp, MapHandler& mapHandler, CollissionsDetection& collissionsDetection);
     void clearScreen(const sf::Color color);
     void draw();
     void display();

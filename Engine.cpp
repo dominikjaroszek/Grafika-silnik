@@ -143,19 +143,12 @@ void Engine::handleInput(Player& player, BitmapHandler& bmp, CollissionsDetectio
 }
 
 
-void Engine::update(Player& player, BitmapHandler &bmp, CollissionsDetection& collissionsDetection) {
+void Engine::update(Player& player, BitmapHandler &bmp, MapHandler &mapHandler, CollissionsDetection& collissionsDetection) {
     
     player.lastPosition = player.playerPosition();
     bmp.renderBitmap();
-    bmp.setMapIndex(player.getMapIndex());
-
-
-
-    
-    
-    
-
-    
+    mapHandler.setMapIndex(player.getMapIndex());
+    mapHandler.renderBitmap();
 
     if (collissionsDetection.playerCollisions(player) == 4) {
         player.collisionBottomY = true;
@@ -188,7 +181,7 @@ void Engine::update(Player& player, BitmapHandler &bmp, CollissionsDetection& co
         projectile->update();
 
     
-      enemies = bmp.getEnemies();
+      enemies = mapHandler.getEnemies();
     // std::cout << "\n" << enemies.size() <<"\n";
     for (int i = 0; i < enemies.size(); i++) {
         enemies[i]->update();
@@ -198,7 +191,8 @@ void Engine::update(Player& player, BitmapHandler &bmp, CollissionsDetection& co
     
     for (int i = 0; i < enemies.size(); i++) {
         if (enemies[i]->getPosition().x < player.playerPosition().x)
-            bmp.removeEnemy(i);
+            mapHandler.removeEnemy(i);
+        // kolizja here
     }
 
 }
@@ -333,6 +327,7 @@ void Engine::run() {
     
 
     BitmapHandler bitmapHandler(window);
+    MapHandler mapHandler(window);
     CollissionsDetection collissionsDetection(bitmapHandler);
     
 
@@ -353,7 +348,7 @@ void Engine::run() {
 
         
         handleInput(player,bitmapHandler, collissionsDetection);
-        update(player, bitmapHandler, collissionsDetection);
+        update(player, bitmapHandler, mapHandler, collissionsDetection);
         if (player.getMapIndex() == 0) {
             draw();
             display();
