@@ -29,12 +29,19 @@ void BitmapHandler::renderBitmap() {
 		static_cast<float>(window.getSize().y) / sprite.getLocalBounds().height
 	);
 
+	
+	sf::Font font;
+	if (!font.loadFromFile("MapAssets/Granesta.ttf")) {
+		std::cout << "ttf error";
+	}
+
 	sf::Text text;
-	text.setString("Hello, SFML!");
-	text.setCharacterSize(24);
+	text.setFont(font);
+	text.setString("Level: " + std::to_string(mapCounter+1) + "/69");
+	text.setCharacterSize(25);
+	text.setPosition(10, 10);
 	text.setFillColor(sf::Color::White);
-	text.setStyle(sf::Text::Bold);
-	text.setPosition(0, 0);
+	
 
 	
 	window.draw(sprite);	
@@ -81,6 +88,8 @@ void BitmapHandler::renderPlatforms() {
 		}
 	
 	}
+
+
 
 
 

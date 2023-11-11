@@ -8,8 +8,8 @@ Enemy::Enemy(sf::RenderWindow& window, sf::Vector2f position, std::string type):
 
     sprite.setTexture(texture);
     sprite.setPosition(position);
-    int newWidth = 150;
-    int newHeight = 150;
+    int newWidth = 100;
+    int newHeight = 100;
     sprite.setScale(newWidth / sprite.getLocalBounds().width, newHeight / sprite.getLocalBounds().height);
 
     window.draw(sprite);
