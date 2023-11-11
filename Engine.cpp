@@ -70,6 +70,8 @@ void Engine::handleInput(Player& player, BitmapHandler& bmp, CollissionsDetectio
     float textureH = bmp.getSize().height;
    
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+        if (player.playerPosition().x + 50 > 800 && enemies.size()>0)
+            player.playerSetPosition(sf::Vector2f(750, player.playerPosition().y));
         sf::Vector2f mv(5.0f, 0.0f);
         
         if(collissionsDetection.playerCollisions(player)!=1){
@@ -147,6 +149,14 @@ void Engine::update(Player& player, BitmapHandler &bmp, CollissionsDetection& co
     bmp.renderBitmap();
     bmp.setMapIndex(player.getMapIndex());
 
+
+
+    
+    
+    
+
+    
+
     if (collissionsDetection.playerCollisions(player) == 4) {
         player.collisionBottomY = true;
     }
@@ -168,28 +178,28 @@ void Engine::update(Player& player, BitmapHandler &bmp, CollissionsDetection& co
         std::cout << collissionsDetection.playerCollisions(player)<< player.collisionTopY/*"kolizja"*/ << std::endl;
 
 
-    
-
+   
     player.update();
 
   
+
+    
     if (projectile)
         projectile->update();
 
     
-    
+      enemies = bmp.getEnemies();
+    // std::cout << "\n" << enemies.size() <<"\n";
+    for (int i = 0; i < enemies.size(); i++) {
+        enemies[i]->update();
+    }
+  
 
     
-
-   
-   /*
-    for (int i = 0; i < projectiles.size(); i++) {
-        projectiles[i].update();
-
-   }
-
-    */
-   
+    for (int i = 0; i < enemies.size(); i++) {
+        if (enemies[i]->getPosition().x < player.playerPosition().x)
+            bmp.removeEnemy(i);
+    }
 
 }
 

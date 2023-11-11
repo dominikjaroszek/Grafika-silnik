@@ -35,7 +35,7 @@ private:
     bool initialized;
     std::unique_ptr<Projectile> projectile;
     std::vector<Projectile> projectiles;
-    
+    std::vector<Enemy*> enemies;
 
     Engine();
     ~Engine();

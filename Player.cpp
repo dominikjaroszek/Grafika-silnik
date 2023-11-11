@@ -12,7 +12,7 @@ Player::Player(sf::RenderWindow& window, sf::Vector2f position) : window(window)
     int newWidth = 100;
     int newHeight = 100;
     sprite.setScale(newWidth / sprite.getLocalBounds().width, newHeight / sprite.getLocalBounds().height);
-    std::cout << sprite.getGlobalBounds().height;
+    //std::cout << sprite.getGlobalBounds().height;
     sprite.setPosition(sf::Vector2f(position.x, 400));
     sprite.setTexture(texture);
     gravity_speed = 1;
