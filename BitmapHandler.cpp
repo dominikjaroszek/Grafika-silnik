@@ -1,4 +1,5 @@
 #include "BitmapHandler.h"
+#include <iostream>
 
 BitmapHandler::BitmapHandler(sf::RenderWindow& window): window(window) {
 
@@ -14,33 +15,53 @@ BitmapHandler::BitmapHandler(sf::RenderWindow& window): window(window) {
 	
 
 	this->renderBitmap();
+	mapCounter = 0;
+	
+
+	
 }
 
 void BitmapHandler::renderBitmap() {
 	sf::Sprite sprite(texture);
-	//sf::Sprite back(textureBack);
-	back.setTexture(textureBack);
-	if (!window.isOpen())
-		return;
-
+	
 	sprite.setScale(
 		static_cast<float>(window.getSize().x) / sprite.getLocalBounds().width,
 		static_cast<float>(window.getSize().y) / sprite.getLocalBounds().height
 	);
 
-	back.setScale(0.3,0.3
-		/*static_cast<float>(window.getSize().x) / 100,
-		static_cast<float>(window.getSize().y) / back.getLocalBounds().height*/
-	);
-
-	//back.move(sf::Vector2f(3.0f, 2.0f));
-	back.setPosition(sf::Vector2f(200.0f, 50.0f));
-
-	//back.setOrigin(sf::Vector2f(back.getLocalBounds().width, back.getLocalBounds().height));
 	
 	window.draw(sprite);	
-	window.draw(back);
+	this->renderPlatforms();
+	
 }
+
+void BitmapHandler::renderPlatforms() {
+	map = mapData.getMap(mapCounter);
+
+	sf::Image tmpImage;
+	sf::Texture tmpTexture;
+	sf::Sprite tmpSprite;
+
+
+	for (const auto& pair : map) {
+		std::cout << pair.first.x << ", " << pair.first.y <<  pair.second << std::endl;
+
+		
+		if (!tmpImage.loadFromFile("MapAssets/" + pair.second + ".png")) {
+			return;
+		}
+	
+		tmpTexture.loadFromImage(tmpImage);
+		sf::Sprite tmpSprite(tmpTexture);
+		tmpSprite.setPosition(pair.first);
+		window.draw(tmpSprite);
+
+	}
+}
+void BitmapHandler::setMapIndex(int index) {
+	this->mapCounter = index;
+}
+
 
 sf::FloatRect BitmapHandler::getSize() {
 	return back.getGlobalBounds();
