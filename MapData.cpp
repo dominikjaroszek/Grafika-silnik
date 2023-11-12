@@ -33,3 +33,19 @@ std::vector<std::pair<sf::Vector2f, std::string>> MapData::getEnemy(int ID) {
         return {};
 
 }
+
+
+std::set<std::string> MapData::getAllMaps() {
+
+    std::set<std::string> mapsVector;
+
+    for (const auto& mapEntry : maps) {
+        const auto& vectorOfPairs = mapEntry.second;
+
+        for (const auto& pair : vectorOfPairs) {
+            mapsVector.insert(pair.second);
+        }
+    }
+
+    return mapsVector;
+}

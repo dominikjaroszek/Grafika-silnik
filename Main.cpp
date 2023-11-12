@@ -8,7 +8,7 @@
 int main() {
     Engine& gameEngine = Engine::getInstance();
     gameEngine.init(800, 600, "Game Window");
-   
+   // gameEngine.setFramesPerSecond(30);
     gameEngine.run();
     
 

@@ -124,7 +124,7 @@ void Engine::update(Player& player, BitmapHandler &bmp, MapHandler &mapHandler, 
 
     
     
-   // collissionsDetection.playerCollisions(player);
+    //collissionsDetection.playerCollisions(player);
 
     /*
     std::thread collisionThread([&]() {

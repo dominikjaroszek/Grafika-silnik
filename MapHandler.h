@@ -14,6 +14,7 @@ public:
 	void removeEnemy(int index);
 	void renderBitmap();
 	std::vector<sf::Sprite> getPlatformSprites();
+	
 
 private:
 	sf::RenderWindow& window;
@@ -26,6 +27,9 @@ private:
 	std::vector<sf::Sprite> platformSprites;
 	sf::Text text;
 	sf::Font font;
+	void loadTextures();
+	std::set<std::string> imagesSet;
+	std::map<std::string, sf::Texture> mapTextures;
 
 	void renderPlatforms();
 };
