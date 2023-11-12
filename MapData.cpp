@@ -2,7 +2,7 @@
 
 
 MapData::MapData() {
-	maps[0] = { {sf::Vector2f(300,300), "platform_1"} };
+	maps[0] = { {sf::Vector2f(300,400), "platform_1"} };
 	maps[1] = { {sf::Vector2f(300,300), "platform_1"}, {sf::Vector2f(500,400), "platform_1"} };
 	maps[2] = { {sf::Vector2f(400,300), "platform_1"}, {sf::Vector2f(500,300), "platform_1"} };
 	maps[2] = { {sf::Vector2f(500,300), "platform_1"}, {sf::Vector2f(500,400), "platform_1"}, {sf::Vector2f(500,200), "platform_1"} };

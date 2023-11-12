@@ -124,7 +124,7 @@ void Engine::update(Player& player, BitmapHandler &bmp, MapHandler &mapHandler, 
 
     
     
-    //collissionsDetection.playerCollisions(player);
+    collissionsDetection.playerCollisions(player);
 
     /*
     std::thread collisionThread([&]() {
@@ -286,7 +286,7 @@ void Engine::display() {
 void Engine::run() {
     sf::Clock clock;
     float deltaTime = 0.0f;
-    
+    const float fixedTimeStep = 1.0f / 60.0f;
 
     BitmapHandler bitmapHandler(window);
     MapHandler mapHandler(window);
@@ -302,23 +302,26 @@ void Engine::run() {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-     
-        sf::Time elapsed = clock.getElapsedTime();
-        frameCounterUpdate();
-      
-        deltaTime = clock.restart().asSeconds();
-
+        deltaTime += clock.restart().asSeconds(); 
+       
+  
         
-        handleInput(player,bitmapHandler, mapHandler, collissionsDetection);
-        update(player, bitmapHandler, mapHandler, collissionsDetection);
-        if (player.getMapIndex() == 0) {
-            draw();
-            display();
+        
+        while (deltaTime >= fixedTimeStep) {
+            frameCounterUpdate();
+            handleInput(player, bitmapHandler, mapHandler, collissionsDetection);
+            update(player, bitmapHandler, mapHandler, collissionsDetection);
+            deltaTime -= fixedTimeStep;
+            if (player.getMapIndex() == 0) {
+                  draw();
+                display();
+            }
+            else {
+                display();
+                   draw();
+            }
         }
-        else {
-            display();
-            draw();
-        }
+        
         
         std::cout << getFps() << std::endl;
     }
