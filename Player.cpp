@@ -23,7 +23,6 @@ Player::Player(sf::RenderWindow& window, sf::Vector2f position) : window(window)
     isMovingX = false;
     isMovingY = false;
     lastPos = sf::Vector2f(0, 0);
-    mapIndex = 0;
  
 }
 
@@ -74,29 +73,7 @@ void Player::update() {
         this->updateAnimationJump();
 
 
-
-    sf::Vector2f pos = sprite.getPosition();
-    if (pos.x > 800) {
-        sprite.setPosition(sf::Vector2f(0, pos.y));
-        mapIndex += 1;
-    }
-    else if (pos.x < 0) {
-        if (mapIndex > 0) {
-            sprite.setPosition(sf::Vector2f(800, pos.y));
-            mapIndex -= 1;
-        }
-       
-    }
-   
-
-
-
     window.draw(sprite);
-
-}
-
-int Player::getMapIndex() {
-    return mapIndex;
 }
 
 sf::Vector2f Player::playerPosition() {
@@ -196,8 +173,4 @@ bool Player::isMovingHorizontal() {
 
 void Player::playerSetPosition() {
     sprite.setPosition(lastPosition);
-}
-
-void Player::playerSetPosition(sf::Vector2f pos) {
-    sprite.setPosition(pos);
 }
