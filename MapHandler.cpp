@@ -7,9 +7,7 @@ MapHandler::MapHandler(sf::RenderWindow& window) : window(window) {
 		std::cout << "ttf error";
 	}
 
-	if (!tmpImage.loadFromFile("MapAssets/" + pair.second + ".png")) {
-		return;
-	}
+	
 
 	this->renderBitmap();
 	mapCounter = 0;
@@ -41,7 +39,9 @@ void MapHandler::renderPlatforms() {
 		//std::cout << pair.first.x << ", " << pair.first.y <<  pair.second << std::endl;
 
 
-		
+		if (!tmpImage.loadFromFile("MapAssets/" + pair.second + ".png")) {
+			return;
+		}
 
 		tmpTexture.loadFromImage(tmpImage);
 		sf::Sprite tmpSprite(tmpTexture);
