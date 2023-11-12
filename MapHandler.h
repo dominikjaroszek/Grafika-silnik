@@ -3,6 +3,7 @@
 #include <Set>
 #include "Enemy.h"
 #include "MapData.h"
+#include <set>
 
 class MapHandler
 {
@@ -12,6 +13,7 @@ public:
 	std::vector<Enemy*> getEnemies();
 	void removeEnemy(int index);
 	void renderBitmap();
+	std::vector<sf::Sprite> getPlatformSprites();
 
 private:
 	sf::RenderWindow& window;
@@ -21,6 +23,9 @@ private:
 	std::vector<std::pair<sf::Vector2f, std::string>> enemies;
 	std::vector<Enemy*> createdEnemies;
 	std::set<int> enemiesRenderedOnMap;
+	std::vector<sf::Sprite> platformSprites;
+	sf::Text text;
+	sf::Font font;
 
 	void renderPlatforms();
 };

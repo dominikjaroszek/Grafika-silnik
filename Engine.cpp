@@ -7,6 +7,8 @@
 #include "Player.h"
 #include <memory>
 
+#include <thread>
+
 
 
 Engine::Engine() : initialized(false) {
@@ -57,66 +59,42 @@ void Engine::enableMouseInput() {
     }
 }
 
-void Engine::handleInput(Player& player, BitmapHandler& bmp, CollissionsDetection &collissionsDetection) {
+void Engine::handleInput(Player& player, BitmapHandler& bmp,MapHandler &mapHandler, CollissionsDetection &collissionsDetection) {
 
-    float playerX = player.playerPosition().x;
-    float playerY = player.playerPosition().y;
-    float playerW = player.playerSize().width;
-    float playerH = player.playerSize().height;
-
-    float textureX = bmp.getSize().getPosition().x;
-    float textureY = bmp.getSize().getPosition().y;
-    float textureW = bmp.getSize().width;
-    float textureH = bmp.getSize().height;
+  
    
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         if (player.playerPosition().x + 50 > 800 && enemies.size()>0)
             player.playerSetPosition(sf::Vector2f(750, player.playerPosition().y));
+
         sf::Vector2f mv(5.0f, 0.0f);
-        
-        if(collissionsDetection.playerCollisions(player)!=1){
-            //player.lastPosition = player.playerPosition();
-            
+        if (collissionsDetection.playerCollisions(player, mv) != 1)
             player.move(mv);
-            }
-        /*else {
-            std::cout << "player x y w h" << playerX << " " << playerY << " " << playerW << " " << playerH << std::endl;
-            std::cout << "texture x y w h" << textureX << " " << textureY << " " << textureW << " " << textureH << std::endl;
-        }*/
-        //else
-           // player.playerSetPosition();
        
     }
+        
+    
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         if (player.playerPosition().x - 50 < 0 && player.getMapIndex() == 0)
             player.playerSetPosition(sf::Vector2f(50,player.playerPosition().y));
+
         sf::Vector2f mv(-5.0f, 0.0f);
-       // player.lastPosition = player.playerPosition();
-        if (collissionsDetection.playerCollisions(player)!=2) {
-            //player.lastPosition = player.playerPosition();
-            player.move(mv);
-        }
-       /* else {
-            std::cout << "player x y w h" << playerX << " " << playerY << " " << playerW << " " << playerH << std::endl;
-            std::cout << "texture x y w h" << textureX << " " << textureY << " " << textureW << " " << textureH << std::endl;
-        }*/
-            //player.playerSetPosition(); */
-   
+
+        if(collissionsDetection.playerCollisions(player, mv) != 1)
+             player.move(mv);
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-        //player.lastPosition = player.playerPosition();
-        //if (collissionsDetection.playerCollisions(player)!=3) {
-            //player.lastPosition = player.playerPosition();
+      
             player.jump();
-       /* }
-        else {
-            player.playerSetPosition();
-        }*/
+          //  player.playerSetPosition();
+        
     }
 
   
+
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
 
         int direction = player.getDirection();
@@ -130,51 +108,35 @@ void Engine::handleInput(Player& player, BitmapHandler& bmp, CollissionsDetectio
 
     }
 
-    /*
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-        if (projectiles.size() < 52) {
-            Projectile pro(window, player.playerPosition());
-            projectiles.push_back(pro);
-        }
-       
-        }
-    */
+ 
  
 }
 
 
 void Engine::update(Player& player, BitmapHandler &bmp, MapHandler &mapHandler, CollissionsDetection& collissionsDetection) {
     
+
     player.lastPosition = player.playerPosition();
     bmp.renderBitmap();
     mapHandler.setMapIndex(player.getMapIndex());
     mapHandler.renderBitmap();
+    collissionsDetection.setPlatformSprites(mapHandler.getPlatformSprites());
 
-    if (collissionsDetection.playerCollisions(player) == 4) {
-        player.collisionBottomY = true;
-    }
-    else {
-        player.collisionBottomY = false;
-    }
+    
+    
+   // collissionsDetection.playerCollisions(player);
 
-    if (collissionsDetection.playerCollisions(player) == 3) {
-        //player.collisionY = 1;
-        //std::cout << collissionsDetection.playerCollisions(player)/*"kolizja"*/<<std::endl;
-        player.collisionTopY = true;
-        player.playerSetPosition();
-    }
-    else
-        //player.collisionY = 2;
-        //std::cout << collissionsDetection.playerCollisions(player)/* "brak kolizji"*/<<std::endl;
-        player.collisionTopY = false;
-    if(collissionsDetection.playerCollisions(player))
-        std::cout << collissionsDetection.playerCollisions(player)<< player.collisionTopY/*"kolizja"*/ << std::endl;
+    /*
+    std::thread collisionThread([&]() {
 
+        collissionsDetection.testThread(player);
+        });
+    collisionThread.join();
+    */
+    
 
-   
     player.update();
-
-  
+    
 
     
     if (projectile)
@@ -194,7 +156,7 @@ void Engine::update(Player& player, BitmapHandler &bmp, MapHandler &mapHandler, 
             mapHandler.removeEnemy(i);
         // kolizja here
     }
-
+    
 }
 
 void Engine::clearScreen(const sf::Color color) {
@@ -248,7 +210,7 @@ void Engine::draw() {
     //line.rotate(30);
     line.scale(3);
     line.draw(primitiveRenderer, sf::Color::Magenta, false);
-    line.rotate(0.1);
+    line.rotate(0.1f);
     line.draw(primitiveRenderer, sf::Color::Magenta, false);
     std::vector<Point2D> points;
    Point2D point1 = Point2D(0.0f, 0.0f);
@@ -328,12 +290,12 @@ void Engine::run() {
 
     BitmapHandler bitmapHandler(window);
     MapHandler mapHandler(window);
-    CollissionsDetection collissionsDetection(bitmapHandler);
-    
 
     sf::Vector2f position(100.0f, 500.0f);
     Player player(window, position);
 
+    CollissionsDetection collissionsDetection;
+  
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -342,12 +304,12 @@ void Engine::run() {
         }
      
         sf::Time elapsed = clock.getElapsedTime();
-
+        frameCounterUpdate();
       
         deltaTime = clock.restart().asSeconds();
 
         
-        handleInput(player,bitmapHandler, collissionsDetection);
+        handleInput(player,bitmapHandler, mapHandler, collissionsDetection);
         update(player, bitmapHandler, mapHandler, collissionsDetection);
         if (player.getMapIndex() == 0) {
             draw();
@@ -358,7 +320,7 @@ void Engine::run() {
             draw();
         }
         
-       
+        std::cout << getFps() << std::endl;
     }
 }
 
@@ -379,4 +341,18 @@ void Engine::logInfo(const std::string infoMessage) {
     std::ofstream diagnosticLog("diagnostic_log.txt", std::ios::app);
     diagnosticLog << "Info: " << infoMessage << std::endl;
     diagnosticLog.close();
+}
+
+void Engine::frameCounterUpdate(){
+    frameCount++;
+    if (frameClock.getElapsedTime().asSeconds() >= 1.0f) {
+        fps = frameCount;
+        frameCount = 0;
+        frameClock.restart();
+    }
+
+}
+
+int Engine::getFps(){
+    return fps;
 }

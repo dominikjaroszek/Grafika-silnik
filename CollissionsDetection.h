@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 #include "Player.h"
 #include "Projectile.h"
 #include "BitmapHandler.h"
@@ -6,12 +7,14 @@
 class CollissionsDetection
 {
 public:
-	CollissionsDetection(BitmapHandler& bitmap);
-
+	CollissionsDetection();
+	void setPlatformSprites(std::vector<sf::Sprite> sprites);
+	int playerCollisions(Player& player, sf::Vector2f move);
 	int playerCollisions(Player& player);
-	bool projectileCollision(Projectile& projectile);
+	int testThread(Player& player);
+	
 
 private:
-	BitmapHandler bitmap;
+	std::vector<sf::Sprite> platformSprites;
 };
 

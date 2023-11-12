@@ -21,6 +21,11 @@ public:
 	bool collisionBottomY;
 	bool isJumping;
 	int getMapIndex();
+	void setGravityZero();
+	void updatePlayerY();
+	float getGravitySpeed();
+	void setCanJump();
+	
 
 	
 	
@@ -41,6 +46,7 @@ private:
 	void updateAnimationJump();
 	void updateAnimationWalk();
 	int mapIndex;
+	bool canJump;
 	
 };
 
