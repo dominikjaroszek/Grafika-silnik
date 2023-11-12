@@ -8,61 +8,35 @@ BitmapHandler::BitmapHandler(sf::RenderWindow& window): window(window) {
 	}
 	texture.loadFromImage(bitmapImage);
 	
-	if (!bitmapImageBack.loadFromFile("MapAssets/nwm.png")) {
+	if (!bitmapImageFloor.loadFromFile("MapAssets/platform_floor.png")) {
 		return;
 	}
-	textureBack.loadFromImage(bitmapImageBack);
+	textureFloor.loadFromImage(bitmapImageFloor);
 	
-
-	this->renderBitmap();
-	mapCounter = 0;
-	
-
-	
-}
-
-void BitmapHandler::renderBitmap() {
-	sf::Sprite sprite(texture);
-	
+	sprite.setTexture(texture);
+	floor.setTexture(textureFloor);
 	sprite.setScale(
 		static_cast<float>(window.getSize().x) / sprite.getLocalBounds().width,
 		static_cast<float>(window.getSize().y) / sprite.getLocalBounds().height
 	);
 
+	floor.setPosition(sf::Vector2f(0,550));
+
+	this->renderBitmap();
+
+
+	
+}
+
+void BitmapHandler::renderBitmap() {
 	
 	window.draw(sprite);	
-	this->renderPlatforms();
-	
+	window.draw(floor);
 }
 
-void BitmapHandler::renderPlatforms() {
-	map = mapData.getMap(mapCounter);
-
-	sf::Image tmpImage;
-	sf::Texture tmpTexture;
-	sf::Sprite tmpSprite;
-
-
-	for (const auto& pair : map) {
-		std::cout << pair.first.x << ", " << pair.first.y <<  pair.second << std::endl;
-
-		
-		if (!tmpImage.loadFromFile("MapAssets/" + pair.second + ".png")) {
-			return;
-		}
-	
-		tmpTexture.loadFromImage(tmpImage);
-		sf::Sprite tmpSprite(tmpTexture);
-		tmpSprite.setPosition(pair.first);
-		window.draw(tmpSprite);
-
-	}
-}
-void BitmapHandler::setMapIndex(int index) {
-	this->mapCounter = index;
-}
 
 
 sf::FloatRect BitmapHandler::getSize() {
-	return back.getGlobalBounds();
+	return floor.getGlobalBounds();
 }
+

@@ -4,15 +4,13 @@
 #include <iostream>
 
 Player::Player(sf::RenderWindow& window, sf::Vector2f position) : window(window) {
-    if (!texture.loadFromFile("CharacterAssets/Idle (1).png")) {
+    if (!texture.loadFromFile("CharacterAssets/Idle (1).png", sf::IntRect(0, 0, 300, 500))) {
         std::cout << "Err";
     }
 
     sprite.setTexture(texture);
-    int newWidth = 100;
-    int newHeight = 100;
-    sprite.setScale(newWidth / sprite.getLocalBounds().width, newHeight / sprite.getLocalBounds().height);
-    std::cout << sprite.getGlobalBounds().height;
+    sprite.setScale(0.2f, 0.2f);
+    //std::cout << sprite.getGlobalBounds().height;
     sprite.setPosition(sf::Vector2f(position.x, 400));
     sprite.setTexture(texture);
     gravity_speed = 1;
@@ -24,28 +22,25 @@ Player::Player(sf::RenderWindow& window, sf::Vector2f position) : window(window)
     isMovingY = false;
     lastPos = sf::Vector2f(0, 0);
     mapIndex = 0;
+    canJump = true;
  
 }
 
 void Player::update() {
     
-    bottomY = sprite.getPosition().y + sprite.getLocalBounds().height;
-
-    if (collisionTopY)
-        gravity_speed = 0;
-    else
-        gravity_speed += 1;
+ 
+    gravity_speed += 1;
    
-    if (collisionBottomY) {
-        gravity_speed = 1;
+    if (sprite.getPosition().y < 0) {
+        sprite.setPosition(sf::Vector2f(sprite.getPosition().x, 0));
+        gravity_speed = 0;
     }
-    
-
-    sprite.setPosition(sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y + gravity_speed));
-    
-    if (sprite.getPosition().y > 460) {
-        sprite.setPosition(sf::Vector2f(sprite.getPosition().x, 460)); 
-        gravity_speed = 0; 
+        
+   
+    if (sprite.getPosition().y > 450) {
+       sprite.setPosition(sf::Vector2f(sprite.getPosition().x, 450)); 
+       gravity_speed = 0; 
+       canJump = true;
     }
 
     sprite.getGlobalBounds().getPosition().y;
@@ -88,12 +83,14 @@ void Player::update() {
        
     }
    
-
-
-
     window.draw(sprite);
 
 }
+
+void Player::updatePlayerY() {
+    sprite.setPosition(sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y + gravity_speed));
+}
+
 
 int Player::getMapIndex() {
     return mapIndex;
@@ -116,18 +113,19 @@ int Player::getDirection() {
         return 1;
 }
 
+
 void Player::move(sf::Vector2f move) {
     sprite.move(move);
     if (move.x > 0) {
         if (sprite.getScale().x < 0)
             sprite.move(sf::Vector2f(-50, 0));
-        sprite.setScale(100 / sprite.getLocalBounds().width, 100 / sprite.getLocalBounds().height);
+        sprite.setScale(0.2f,0.2f);
 
     }
-    else {
+    else if(move.x <0){
         if (sprite.getScale().x > 0)
             sprite.move(sf::Vector2f(50, 0));
-        sprite.setScale(-100 / sprite.getLocalBounds().width, 100 / sprite.getLocalBounds().height);
+        sprite.setScale(-0.2f, 0.2f);
     }
 
     this->updateAnimationWalk();
@@ -136,24 +134,23 @@ void Player::move(sf::Vector2f move) {
 
 void Player::jump() {
     
-    if(sprite.getPosition().y >= 100)
+    if (canJump) {
+        canJump = false;
         this->gravity_speed = -20;
-
-    if (collisionTopY) {
-        sprite.setPosition(sprite.getPosition().x, sprite.getPosition().y - 10);
-        gravity_speed = -20;
     }
+   
 }
 
 
 void Player::updateAnimationIdle() {
 
     std::string fileName = "CharacterAssets/Idle (" + std::to_string((int)IdleAnimationIndex) + ").png";
-    if (!texture.loadFromFile(fileName)) {
+    if (!texture.loadFromFile(fileName, sf::IntRect(0, 0, 300, 500))) {
         std::cout << "Err";
     }
 
     sprite.setTexture(texture);
+ 
 }
 
 void Player::updateAnimationWalk() {
@@ -170,6 +167,7 @@ void Player::updateAnimationWalk() {
     }
 
     sprite.setTexture(texture);
+ 
 
 }
 
@@ -182,11 +180,12 @@ void Player::updateAnimationJump() {
         JumpAnimationIndex = 1;
 
     std::string fileName = "CharacterAssets/Jump (" + std::to_string((int)JumpAnimationIndex) + ").png";
-    if (!texture.loadFromFile(fileName)) {
+    if (!texture.loadFromFile(fileName, sf::IntRect(0, 0, 300, 500))) {
         std::cout << "Err";
     }
 
     sprite.setTexture(texture);
+ 
 
 }
 
@@ -200,4 +199,16 @@ void Player::playerSetPosition() {
 
 void Player::playerSetPosition(sf::Vector2f pos) {
     sprite.setPosition(pos);
+}
+
+float Player::getGravitySpeed() {
+    return gravity_speed;
+}
+
+void Player::setGravityZero() {
+    gravity_speed = 0;
+}
+
+void Player::setCanJump() {
+    canJump = true;
 }

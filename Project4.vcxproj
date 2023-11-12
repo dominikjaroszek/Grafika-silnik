@@ -136,11 +136,13 @@
     <ClCompile Include="BitmapHandler.cpp" />
     <ClCompile Include="CollissionsDetection.cpp" />
     <ClCompile Include="DrawableObject.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="LineSegment.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MapData.cpp" />
+    <ClCompile Include="MapHandler.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Point2D.cpp" />
     <ClCompile Include="PrimitiveRenderer.cpp" />
@@ -153,10 +155,12 @@
     <ClInclude Include="BitmapHandler.h" />
     <ClInclude Include="CollissionsDetection.h" />
     <ClInclude Include="DrawableObject.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="LineSegment.h" />
     <ClInclude Include="MapData.h" />
+    <ClInclude Include="MapHandler.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Point2D.h" />
     <ClInclude Include="PrimitiveRenderer.h" />

@@ -1,85 +1,100 @@
 #include "CollissionsDetection.h"
 #include <iostream>
 
+CollissionsDetection::CollissionsDetection(){}
 
-CollissionsDetection::CollissionsDetection(BitmapHandler& bitmap) :bitmap(bitmap) {}
+
+void CollissionsDetection::setPlatformSprites(std::vector<sf::Sprite> sprites) {
+	platformSprites = sprites;
+}
 
 
-int CollissionsDetection::playerCollisions(Player& player) {
+int CollissionsDetection::playerCollisions(Player& player, sf::Vector2f move) {
 	
 	float playerX = player.playerPosition().x;
 	float playerY = player.playerPosition().y;
 	float playerW = player.playerSize().width;
 	float playerH = player.playerSize().height;
 
-	float textureX = bitmap.getSize().getPosition().x;
-	float textureY = bitmap.getSize().getPosition().y;
-	float textureW = bitmap.getSize().width;
-	float textureH = bitmap.getSize().height;
+	for (sf::Sprite sprite : platformSprites) {
+		float spriteX = sprite.getPosition().x;
+		float spriteY = sprite.getPosition().y;
+		float spriteW = sprite.getGlobalBounds().width;
+		float spriteH = sprite.getGlobalBounds().height;
 
-	/*if (player.playerSize().intersects(bitmap.getSize())) {
-		return true;
-		std::cout << "AAAAAA";
-	}*/
-
-	//if (player.playerPosition().x - 50 < bitmap.getSize().getPosition().x + bitmap.getSize().width &&
-	//	player.playerPosition().x + player.playerSize().width + 50 > bitmap.getSize().getPosition().x &&
-	//	player.playerPosition().y < bitmap.getSize().getPosition().y + bitmap.getSize().height &&
-	//	player.playerPosition().y + player.playerSize().height > bitmap.getSize().getPosition().y) {
-	//	// Collision detected, do something
-	//	return 1;
-	//}
-
-	//if (player.playerPosition().x + player.playerSize().width + 50 > bitmap.getSize().getPosition().x &&
-	//	//player.playerPosition().x < bitmap.getSize().getPosition().x + bitmap.getSize().width &&
-	//	player.playerPosition().y < bitmap.getSize().getPosition().y + bitmap.getSize().height &&
-	//	player.playerPosition().y + player.playerSize().height > bitmap.getSize().getPosition().y) {
-	//	// Collision detected, do something
-	//	return 2;
-	//}
-
-	/*if (player.playerPosition().x + player.playerSize().width + 5 > bitmap.getSize().left) {
-		return 1;
-	}
-
-	if (player.playerPosition().x - 5 < bitmap.getSize().getPosition().x + bitmap.getSize().width) {
-		return 2;
-	}
-
-	if (player.playerPosition().y - 51 > bitmap.getSize().getPosition().y + bitmap.getSize().height) {
-		return 3;
-	}
-
-	if (player.playerPosition().y+player.playerSize().height + 1 > bitmap.getSize().getPosition().y) {
-		return 4;
-	}
-
-	return 5;
-	
-	player.playerPosition().y > bitmap.getSize().getPosition().y + bitmap.getSize().height  player.playerPosition().y + player.playerSize().height > bitmap.getSize().getPosition().y)*/
-	if (playerY + playerH +1> textureY && playerY<textureY+textureH+20 && (playerX > textureX && playerX < textureX + textureW)) {
-		if (playerY < textureY + textureH && (playerX > textureX && playerX < textureX + textureW))
-			return 3;
-		else
-			return 4;
-	}
-	if (playerX+ playerW/2 + 5 > textureX && playerX < textureX + textureW && (playerY<textureY+textureH && playerY+playerH>textureY)) {
+		//std::cout << "0\n";
 		
-		return 1;
-	}
-	
-	if (playerX - 5 < textureX+textureW+playerW/2 && playerX > textureX && (playerY<textureY+textureH && playerY+playerH>textureY)) {
 		
-		return 2;
+
+		sf::Vector2f currentPositon = player.playerPosition();
+		player.move(move);
+
+		if (player.playerSize().intersects(sprite.getGlobalBounds())) {
+			std::cout<< "collision";
+			//player.playerSetPosition(currentPositon);
+			player.move(-move);
+			return 1;
+		}
 	}
 
-	
 
-	/*if (playerX+ playerW - 5 > textureX + textureW && (playerY+playerH>textureY || playerY<textureY+textureH)) {
-		return 1;
-	}*/
+	return 0;
+}
 
-	//if (playerX + playerW - 5 < textureX + textureW) {
-	//	return 2;
-	//}
+int CollissionsDetection::playerCollisions(Player& player) {
+
+	float playerX = player.playerPosition().x;
+	float playerY = player.playerPosition().y;
+	float playerW = player.playerSize().width;
+	float playerH = player.playerSize().height;
+
+	for (sf::Sprite sprite : platformSprites) {
+		float spriteX = sprite.getPosition().x;
+		float spriteY = sprite.getPosition().y;
+		float spriteW = sprite.getGlobalBounds().width;
+		float spriteH = sprite.getGlobalBounds().height;
+
+	//	std::cout << "0\n";
+
+		sf::Vector2f currentPositon = player.playerPosition();
+		float gravity = player.getGravitySpeed();
+
+		bool underPlatform = false;
+		if (player.playerPosition().y > spriteY)
+			underPlatform = true;
+
+		player.move(sf::Vector2f(0, gravity));
+
+		if (player.playerSize().intersects(sprite.getGlobalBounds()) && (player.playerPosition().y  < spriteY + spriteH && underPlatform)) {
+			std::cout << "collisionBOTTOM";
+			//player.playerSetPosition(currentPositon);
+		//	player.playerSetPosition(sf::Vector2f(playerX, spriteY - playerH));
+
+			player.playerSetPosition(sf::Vector2f(playerX, spriteY + spriteH + 1));
+			//player.move(sf::Vector2f(0, spriteY - playerH - gravity));
+			player.setGravityZero();
+		}
+
+		if (player.playerSize().intersects(sprite.getGlobalBounds()) && (player.playerPosition().y + playerH > spriteY && player.playerPosition().y + playerH < spriteY + spriteH)) {
+			std::cout << "collisionTOP";
+			//player.playerSetPosition(currentPositon);
+			player.playerSetPosition(sf::Vector2f(playerX, spriteY - playerH));
+			//player.move(sf::Vector2f(0, spriteY - playerH - gravity));
+			player.setGravityZero();
+			player.setCanJump();
+			
+		}
+
+
+		
+	}
+
+
+	return 1;
+}
+
+int CollissionsDetection::testThread(Player& player) {
+	while(1)
+		std::cout << "thread\n";
+	return 0;
 }

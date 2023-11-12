@@ -6,6 +6,8 @@
 #include "Player.h"
 #include "BitmapHandler.h"
 #include "CollissionsDetection.h"
+#include "Enemy.h"
+#include "MapHandler.h"
 
 
 class Engine {
@@ -18,14 +20,16 @@ public:
     void setWindowSize(int width, int height);
     void setFullscreen(bool fullscreen);
     void enableMouseInput();
-    void handleInput(Player& player, BitmapHandler& bmp, CollissionsDetection &collissionsDetection);
-    void update(Player& player, BitmapHandler& bmp, CollissionsDetection& collissionsDetection);
+    void handleInput(Player& player, BitmapHandler& bmp, MapHandler& mapHandler, CollissionsDetection& collissionsDetection);
+    void update(Player& player, BitmapHandler& bmp, MapHandler& mapHandler, CollissionsDetection& collissionsDetection);
     void clearScreen(const sf::Color color);
     void draw();
     void display();
     void run();
     //void run2b();
     sf::RenderWindow& getWindow();
+    void frameCounterUpdate();
+    int getFps();
     
 
 private:
@@ -35,7 +39,7 @@ private:
     bool initialized;
     std::unique_ptr<Projectile> projectile;
     std::vector<Projectile> projectiles;
-    
+    std::vector<Enemy*> enemies;
 
     Engine();
     ~Engine();
@@ -43,4 +47,8 @@ private:
     Engine& operator=(const Engine&) = delete;
     void logError(const std::string errorMessage);
     void logInfo(const std::string infoMessage);
+
+    int frameCount;
+    int fps;
+    sf::Clock frameClock;
 };
