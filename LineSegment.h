@@ -21,6 +21,7 @@ public:
     void translate(float dx, float dy) override;
     void rotate(float angle) override;
     void scale(float factor) override;
+    void drawCherry(PrimitiveRenderer& renderer, sf::Vector2f position);
 
 private:
     Point2D& startPoint; // Zamiast referencji, u¿yj obiektów Point2D

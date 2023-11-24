@@ -310,3 +310,4 @@ void PrimitiveRenderer::drawPolygon(std::vector<LineSegment>& lines, sf::Color c
     }
     
 }
+

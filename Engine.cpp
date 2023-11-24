@@ -235,8 +235,8 @@ void Engine::draw() {
     std::vector<LineSegment> lines;
 
     Point2D start1(100.0f, 100.0f);
-    Point2D start2(200.0f, 100.0f);
-    Point2D start3(200.0f, 200.0f);
+    Point2D start2(200.0f, 150.0f);
+    Point2D start3(200.0f, 160.0f);
     Point2D start4(100.0f, 150.0f);
 
     lines.push_back(LineSegment(start1, start2));
@@ -265,12 +265,13 @@ void Engine::draw() {
     sf::Vector2f f1(0.0f, 550.0f);
     sf::Vector2f f2(800.0f, 550.0f);
     //primitiveRenderer.drawLine(f1, f2, sf::Color::Green);
-
-
+    LineSegment chery(start1, start2);
+    chery.drawCherry(primitiveRenderer, sf::Vector2f(400.0f, 300.0f));
+    chery.drawCherry(primitiveRenderer, sf::Vector2f(500.0f, 400.0f));
     
-    sf::Vector2f c(600.0f, 200.0f);
-    primitiveRenderer.drawCircleInstrukcja(c, 10, sf::Color::Cyan);
-    primitiveRenderer.floodFill(c, sf::Color::Red);
+   // sf::Vector2f c(600.0f, 200.0f);
+    //primitiveRenderer.drawCircleInstrukcja(c, 10, sf::Color::Cyan);
+    //primitiveRenderer.floodFill(c, sf::Color::Red);
     
     
 
