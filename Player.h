@@ -70,10 +70,11 @@ public:
 	///
 	/// @return Aktualna prêdkoœæ grawitacyjna gracza.
 	float getGravitySpeed();
-	///Metoda ustawiaj¹ca mo¿liwoœæ wykonania skoku.
+	/// Metoda ustawiaj¹ca mo¿liwoœæ wykonania skoku.
 	void setCanJump();
-	
+	/// Przes³oniêcie metody z klasy AnimatedObject.
 	void animate() override;
+	/// Przes³oniêcie metody z klasy DrawableObject.
 	void draw() override;
 	
 	

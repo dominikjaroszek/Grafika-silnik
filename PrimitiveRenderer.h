@@ -101,8 +101,13 @@ public:
     /// @param lines Wektor odcinków definiuj¹cych wielok¹t.
     /// @param color Kolor wielok¹ta.
     void drawFilledPolygon(std::vector<LineSegment>& lines, sf::Color color);
-
+    /// Rysuje wiœniê z u¿yceim metod zdefiniowanych w klasie PrimitiveRenderer.
+    ///
+    /// @param position pozycja na ekranie w narysowana ma zostaæ wiœnia.
     void drawCherry(sf::Vector2f position);
+    /// Rysuje drzewo z u¿yceim metod zdefiniowanych w klasie PrimitiveRenderer.
+    ///
+    /// @param position pozycja na ekranie w narysowana ma zostaæ drzewo.
     void drawTree(sf::Vector2f position);
 private:
     /// Referencja do obiektu okna, w którym rysowane s¹ kszta³ty.
