@@ -28,7 +28,6 @@ Player::Player(sf::RenderWindow& window, sf::Vector2f position) : window(window)
 
 void Player::update() {
     
- 
     gravity_speed += 1;
    
     if (sprite.getPosition().y < 0) {
@@ -44,9 +43,6 @@ void Player::update() {
     }
 
     sprite.getGlobalBounds().getPosition().y;
-    IdleAnimationIndex += 0.2;
-    if (IdleAnimationIndex >= 15)
-        IdleAnimationIndex = 1;
     
     if (lastPos.x != sprite.getPosition().x)
         isMovingX = true;
@@ -61,14 +57,8 @@ void Player::update() {
 
     lastPos = sprite.getPosition();
 
-
-    if(!isMovingX)
-        this->updateAnimationIdle();
-
-    if (isMovingY)
-        this->updateAnimationJump();
-
-
+    this->animate();
+   
 
     sf::Vector2f pos = sprite.getPosition();
     if (pos.x > 800) {
@@ -211,4 +201,20 @@ void Player::setGravityZero() {
 
 void Player::setCanJump() {
     canJump = true;
+}
+
+void Player::animate() {
+    IdleAnimationIndex += 0.2;
+    if (IdleAnimationIndex >= 15)
+        IdleAnimationIndex = 1;
+
+    if (!isMovingX)
+        this->updateAnimationIdle();
+
+    if (isMovingY)
+        this->updateAnimationJump();
+}
+
+void Player::draw() {
+
 }

@@ -24,8 +24,6 @@ BitmapHandler::BitmapHandler(sf::RenderWindow& window): window(window) {
 
 	this->renderBitmap();
 
-
-	
 }
 
 void BitmapHandler::renderBitmap() {
