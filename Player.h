@@ -70,7 +70,7 @@ public:
 	///
 	/// @return Aktualna prêdkoœæ grawitacyjna gracza.
 	float getGravitySpeed();
-	//Metoda ustawiaj¹ca mo¿liwoœæ wykonania skoku.
+	///Metoda ustawiaj¹ca mo¿liwoœæ wykonania skoku.
 	void setCanJump();
 	
 	void animate() override;
