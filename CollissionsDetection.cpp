@@ -93,8 +93,3 @@ int CollissionsDetection::playerCollisions(Player& player) {
 	return 1;
 }
 
-int CollissionsDetection::testThread(Player& player) {
-	while(1)
-		std::cout << "thread\n";
-	return 0;
-}

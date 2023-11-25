@@ -49,13 +49,21 @@ public:
 	///
 	/// @param pos Nowa pozycja gracza jako sf::Vector2f.
 	void playerSetPosition(sf::Vector2f pos);
+	/// Ostatnia pozycja gracza.
 	sf::Vector2f lastPosition;
+	/// Zmienna okreœlaj¹ca, czy dosz³o do kolizji z górn¹ krawêdzi¹ obiektu.
 	bool collisionTopY;
+	/// Zmienna okreœlaj¹ca, czy dosz³o do kolizji z doln¹ krawêdzi¹ obiektu
 	bool collisionBottomY;
+	/// Zmienna okreœlaj¹ca, czy obiekt aktualnie wykonuje skok.
 	bool isJumping;
+	/// Metoda zwracaj¹ca indeks aktualnie wybranej mapy.
+	///
+	/// @return Indeks aktualnej mapy.
 	int getMapIndex();
 	/// Metoda ustawiaj¹ca prêdkoœæ grawitacyjn¹ gracza na zero.
 	void setGravityZero();
+	/// Metoda auktualizuj¹ca Y gracza.
 	void updatePlayerY();
 	/// Metoda zwracaj¹ca prêdkoœæ grawitacyjn¹ gracza.
 	///
@@ -79,6 +87,7 @@ private:
 	int gravity_speed;
 	///Pozycja dolnej krawêdzi gracza.
 	float bottomY;
+	///Indeks aktualnej klatki animacji spoczynku.
 	float IdleAnimationIndex;
 	/// Indeks aktualnej klatki animacji chodu.
 	float WalkAnimationIndex;
@@ -90,9 +99,11 @@ private:
 	bool isMovingY;
 	/// Poprzednia pozycja gracza.
 	sf::Vector2f lastPos;
-	/// 
+	/// Metoda aktualizuj¹ca animacjê spoczynku gracza.
 	void updateAnimationIdle();
+	/// Metoda aktualizuj¹ca animacjê skoku gracza.
 	void updateAnimationJump();
+	/// Metoda aktualizuj¹ca animacjê chodzenia gracza.
 	void updateAnimationWalk();
 	/// Indeks aktualnej mapy.
 	int mapIndex;
