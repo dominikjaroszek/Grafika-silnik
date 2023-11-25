@@ -5,6 +5,8 @@
 #include "MapData.h"
 #include <set>
 
+/// Klasa zarz¹dzaj¹ca mapami w grze.
+
 class MapHandler
 {
 public:

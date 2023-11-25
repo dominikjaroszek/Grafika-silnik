@@ -150,7 +150,6 @@
     <ClCompile Include="ShapeObject.cpp" />
     <ClCompile Include="TransformableObject.cpp" />
     <ClCompile Include="UpdatableObject.cpp" />
-    <ClCompile Include="Cherry.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BitmapHandler.h" />
@@ -162,7 +161,6 @@
     <ClInclude Include="LineSegment.h" />
     <ClInclude Include="MapData.h" />
     <ClInclude Include="MapHandler.h" />
-    <ClInclude Include="Cherry.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Point2D.h" />
     <ClInclude Include="PrimitiveRenderer.h" />
