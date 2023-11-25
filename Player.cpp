@@ -73,7 +73,7 @@ void Player::update() {
        
     }
    
-    window.draw(sprite);
+    this->draw();
 
 }
 
@@ -216,5 +216,5 @@ void Player::animate() {
 }
 
 void Player::draw() {
-
+    window.draw(sprite);
 }
