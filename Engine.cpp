@@ -263,6 +263,7 @@ void Engine::draw() {
     lines.push_back(LineSegment(start3, start4));*/
 
     primitiveRenderer.drawPolygon(lines, sf::Color::Green);
+    //primitiveRenderer.drawFilledPolygon(lines, sf::Color::Green);
     //primitiveRenderer.drawLine(sf::Vector2f(200.0f, 100.0f),)
    // primitiveRenderer.drawPolygon(invalidPolygonPoints, sf::Color::Green);
     
@@ -276,8 +277,8 @@ void Engine::draw() {
     chery.drawCherry(primitiveRenderer, sf::Vector2f(400.0f, 300.0f));
     chery.drawCherry(primitiveRenderer, sf::Vector2f(500.0f, 400.0f));
     
-   // sf::Vector2f c(600.0f, 200.0f);
-    //primitiveRenderer.drawCircleInstrukcja(c, 10, sf::Color::Cyan);
+    sf::Vector2f c(600.0f, 200.0f);
+    primitiveRenderer.drawFilledElipse(c, 15, 10, sf::Color::Cyan);
     //primitiveRenderer.floodFill(c, sf::Color::Red);
     
     BitmapHandler::drawFromFile(window, "MapAssets/nwm.png", 580, 0, 0.2, 0.2);

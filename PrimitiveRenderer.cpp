@@ -311,3 +311,76 @@ void PrimitiveRenderer::drawPolygon(std::vector<LineSegment>& lines, sf::Color c
     
 }
 
+
+void PrimitiveRenderer::drawFilledPolygon(std::vector<LineSegment>& lines, sf::Color color) {
+    
+    for (int i = 1; i < lines.size(); i++) {
+        for (int j = 0; j < i; j++) {
+            if (segmentsIntersect(lines[i], lines[j])) {
+                return;
+            }
+        }
+    }
+
+    // Narysuj wielok¹t
+    for (int i = 0; i < lines.size(); i++) {
+        drawLine(lines[i].getStart().getCoordinates(), lines[i].getEnd().getCoordinates(), color);
+    }
+    float startingX = lines[0].getStart().getCoordinatesX();
+    float startingY = lines[0].getStart().getCoordinatesY();
+    float centerX=0;
+    float centerY=0;
+    for (int i = 0; i < lines.size(); i++) {
+        centerX += lines[i].getStart().getCoordinates().x;
+        centerY += lines[i].getStart().getCoordinates().y;
+    }
+
+    centerX=centerX/lines.size();
+    centerY=centerY / lines.size();
+
+    if (centerX > startingX)
+        startingX++;
+    else
+        startingX--;
+    if (centerY > startingY)
+        startingY++;
+    else
+        startingY--;
+
+    std::cout << "X" << centerX << lines[0].getStart().getCoordinatesX() << std::endl;
+    std::cout << "Y" << centerY << lines[0].getStart().getCoordinatesY() << std::endl;
+    boundryFill(sf::Vector2f(startingX,startingY), color, color);
+
+}
+
+
+void PrimitiveRenderer::drawFilledElipse(sf::Vector2f point, float Rx, float Ry, sf::Color color) {
+    sf::Vector2f currentPoint;
+
+    float step = -1;
+    if (Rx > Ry)
+        step = 1.0 / Rx;
+    else
+        step = 1.0 / Ry;
+
+    for (float a = 0; a < 1.5708; a += step) {
+
+        currentPoint.x = point.x + Rx * cos(a) + 0.5;
+        currentPoint.y = point.y - Ry * sin(a) + 0.5;
+        this->drawPoint(currentPoint, color);
+
+        currentPoint.x = point.x + Rx * cos(a) + 0.5;
+        currentPoint.y = point.y + Ry * sin(a) + 0.5;
+        this->drawPoint(currentPoint, color);
+
+        currentPoint.x = point.x - Rx * cos(a) + 0.5;
+        currentPoint.y = point.y + Ry * sin(a) + 0.5;
+        this->drawPoint(currentPoint, color);
+
+        currentPoint.x = point.x - Rx * cos(a) + 0.5;
+        currentPoint.y = point.y - Ry * sin(a) + 0.5;
+        this->drawPoint(currentPoint, color);
+    }
+
+    boundryFill(point, color, color);
+}

@@ -54,6 +54,13 @@ public:
     /// @param Ry Promieñ elipsy wzd³u¿ osi Y.
     /// @param color Kolor elipsy.
     void drawElipseInstrukcja(sf::Vector2f point, float Rx, float Ry, sf::Color color);
+    /// Rysuje elipsê wype³nion¹ kolorem.
+    ///
+    /// @param point Punkt centralny elipsy.
+    /// @param Rx Promieñ elipsy wzd³u¿ osi X.
+    /// @param Ry Promieñ elipsy wzd³u¿ osi Y.
+    /// @param color Kolor elipsy.
+    void drawFilledElipse(sf::Vector2f point, float Rx, float Ry, sf::Color color);
     /// Wype³nia kszta³t, zaczynaj¹c od danego punktu.
     ///
     /// @param point Pocz¹tkowy punkt do wype³nienia.
@@ -89,6 +96,11 @@ public:
     /// @param lines Wektor odcinków definiuj¹cych wielok¹t.
     /// @param color Kolor wielok¹ta.
     void drawPolygon(std::vector<LineSegment>& lines, sf::Color color);
+    /// Rysuje wype³niony kolorem wielok¹t zdefiniowany przez odcinki.
+    ///
+    /// @param lines Wektor odcinków definiuj¹cych wielok¹t.
+    /// @param color Kolor wielok¹ta.
+    void drawFilledPolygon(std::vector<LineSegment>& lines, sf::Color color);
 private:
     /// Referencja do obiektu okna, w którym rysowane s¹ kszta³ty.
     sf::RenderWindow& window;

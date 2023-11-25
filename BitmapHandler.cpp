@@ -13,11 +13,11 @@ BitmapHandler::BitmapHandler(sf::RenderWindow& window): window(window) {
 	}
 	textureFloor.loadFromImage(bitmapImageFloor);
 	
-	sprite.setTexture(texture);
+	background.setTexture(texture);
 	floor.setTexture(textureFloor);
-	sprite.setScale(
-		static_cast<float>(window.getSize().x) / sprite.getLocalBounds().width,
-		static_cast<float>(window.getSize().y) / sprite.getLocalBounds().height
+	background.setScale(
+		static_cast<float>(window.getSize().x) / background.getLocalBounds().width,
+		static_cast<float>(window.getSize().y) / background.getLocalBounds().height
 	);
 
 	floor.setPosition(sf::Vector2f(0,550));
@@ -30,7 +30,7 @@ BitmapHandler::BitmapHandler(sf::RenderWindow& window): window(window) {
 
 void BitmapHandler::renderBitmap() {
 	
-	window.draw(sprite);	
+	window.draw(background);
 	window.draw(floor);
 }
 
