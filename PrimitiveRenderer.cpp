@@ -286,10 +286,6 @@ bool PrimitiveRenderer::segmentsIntersect(LineSegment &A, LineSegment &B) {
 
 void PrimitiveRenderer::drawPolygon(std::vector<LineSegment>& lines, sf::Color color) {
 
-  
-    
-    
-
     for (int i = 1; i < lines.size(); i++) {
         for (int j = 0; j < i; j++) {
             if (segmentsIntersect(lines[i], lines[j])) {
@@ -309,5 +305,122 @@ void PrimitiveRenderer::drawPolygon(std::vector<LineSegment>& lines, sf::Color c
         drawLine(lines[i].getStart().getCoordinates(), lines[i].getEnd().getCoordinates(), color);
     }
     
+}
+
+void PrimitiveRenderer::drawCherry(sf::Vector2f position) {
+
+    sf::Vector2f point(position.x + 15.0f, position.y + 15.0f);
+    this->drawCircleInstrukcja(point, 15.0f, sf::Color(139, 0, 34));
+
+
+
+    sf::Vector2f stemStart(position.x + 15.0f, position.y - 15.0f);
+    sf::Vector2f stemEnd(position.x + 15.0f, position.y - 25.0f);
+    this->drawLine(stemStart, stemEnd, sf::Color(34, 139, 34));
+
+
+    sf::Vector2f leaf1(position.x + 7.5f, position.y - 15.0f);
+    sf::Vector2f leaf2(position.x + 22.5f, position.y - 15.0f);
+    sf::Vector2f leaf3(position.x + 10.0f, position.y - 20.0f);
+    sf::Vector2f leaf4(position.x + 20.0f, position.y - 20.0f);
+
+    sf::Vector2f point2(position.x + 15.0f, position.y);
+    this->drawLine(point2, leaf1, sf::Color(34, 139, 34));
+    this->drawLine(point2, leaf2, sf::Color(34, 139, 34));
+
+    this->drawLine(point2, leaf3, sf::Color(34, 139, 34));
+    this->drawLine(point2, leaf4, sf::Color(34, 139, 34));
+
+    this->drawLine(point2, leaf3, sf::Color(0, 128, 0, 100));
+    this->drawLine(point2, leaf4, sf::Color(0, 128, 0, 100));
+    sf::Vector2f point3(position.x + 15.0f, position.y + 2.0f);
+
+    this->boundryFill(point3, sf::Color(255, 0, 0), sf::Color(139, 0, 34));
+}
+
+void PrimitiveRenderer::drawTree(sf::Vector2f position) {
+
+   
+    this->drawRectangle(position, sf::Vector2f(50.f, 200.f), sf::Color(139, 89, 39));
+    sf::Vector2f tmp(position.x, position.y);
+    Point2D p1(tmp.x, tmp.y);
+    tmp.x += -100;
+    tmp.y += +30;
+    Point2D p2(tmp.x, tmp.y);
+
+    tmp.x += +50;
+    tmp.y += -50;
+    Point2D p3(tmp.x, tmp.y);
+
+    tmp.x += -40;
+    tmp.y += -20;
+    Point2D p4(tmp.x, tmp.y);
+
+    tmp.x += +30;
+    tmp.y += -30;
+    Point2D p5(tmp.x, tmp.y);
+
+    tmp.x += -20;
+    tmp.y +=  0;
+    Point2D p6(tmp.x, tmp.y);
+
+    Point2D p7(position.x + 25, tmp.y-50);
+
+   
+    std::vector<Point2D> coordinatesLeft;
+    coordinatesLeft.push_back(p1);
+    coordinatesLeft.push_back(p2);
+    coordinatesLeft.push_back(p3);
+    coordinatesLeft.push_back(p4);
+    coordinatesLeft.push_back(p5);
+    coordinatesLeft.push_back(p6);
+    coordinatesLeft.push_back(p7);
+
+ 
+    this->brokeLine(coordinatesLeft, sf::Color(10, 250, 10), 0);
+
+
+
+
+
+    tmp.x = position.x + 50;
+    tmp.y = position.y;
+    Point2D p11(tmp.x, tmp.y);
+    tmp.x += +100;
+    tmp.y += +30;
+    Point2D p22(tmp.x, tmp.y);
+
+    tmp.x += -50;
+    tmp.y += -50;
+    Point2D p33(tmp.x, tmp.y);
+
+    tmp.x += +40;
+    tmp.y += -20;
+    Point2D p44(tmp.x, tmp.y);
+
+    tmp.x += -30;
+    tmp.y += -30;
+    Point2D p55(tmp.x, tmp.y);
+
+    tmp.x += +20;
+    tmp.y += 0;
+    Point2D p66(tmp.x, tmp.y);
+
+    Point2D p77(position.x + 25, tmp.y - 50);
+
+    std::vector<Point2D> coordinatesRight;
+    coordinatesRight.push_back(p11);
+    coordinatesRight.push_back(p22);
+    coordinatesRight.push_back(p33);
+    coordinatesRight.push_back(p44);
+    coordinatesRight.push_back(p55);
+    coordinatesRight.push_back(p66);
+    coordinatesRight.push_back(p77);
+
+
+    this->brokeLine(coordinatesRight, sf::Color(10, 250, 10), 0);
+
+
+   
 }
 
