@@ -108,6 +108,13 @@ void Engine::handleInput(Player& player, BitmapHandler& bmp,MapHandler &mapHandl
 
     }
 
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::P)) {
+        sf::Texture texture;
+        window.display();
+        texture.create(window.getSize().x, window.getSize().y);
+        texture.update(window);
+        BitmapHandler::saveToFile("screenshot.png", texture);
+    }
  
  
 }
@@ -273,8 +280,8 @@ void Engine::draw() {
     //primitiveRenderer.drawCircleInstrukcja(c, 10, sf::Color::Cyan);
     //primitiveRenderer.floodFill(c, sf::Color::Red);
     
+    BitmapHandler::drawFromFile(window, "MapAssets/nwm.png", 580, 0, 0.2, 0.2);
     
-
 }
 
 
@@ -359,4 +366,66 @@ void Engine::frameCounterUpdate(){
 
 int Engine::getFps(){
     return fps;
+}
+
+
+void Engine::init2b(int screenwidth, int screenheight, const std::string windowtitle) {
+    if (!initialized) {
+        window.create(sf::VideoMode(screenwidth, screenheight), windowtitle);
+        buffer1.create(screenwidth, screenheight);
+        buffer2.create(screenwidth, screenheight);
+        window.setFramerateLimit(60);
+        initialized = true;
+    }
+}
+
+void Engine::run2b() {
+    sf::Clock clock;
+    float deltaTime = 0.0f;
+    bool usingBuffer1 = true;
+    
+
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+        deltaTime = clock.restart().asSeconds();
+        
+        if (usingBuffer1) {
+            buffer1.clear();
+            sf::Vector2f position(100.0f, 100.0f);
+            sf::Vector2f size(50.0f, 50.0f);
+            sf::Color color(sf::Color::Red);
+            sf::RectangleShape rectangle(size);
+            rectangle.setPosition(position);
+            rectangle.setFillColor(color);
+            buffer1.draw(rectangle);
+        } else {
+            buffer2.clear();
+            sf::Vector2f position(150.0f, 100.0f);
+            sf::Vector2f size(50.0f, 50.0f);
+            sf::Color color(sf::Color::Blue);
+            sf::RectangleShape rectangle(size);
+            rectangle.setPosition(position);
+            rectangle.setFillColor(color);
+            buffer2.draw(rectangle);
+        }
+
+        if (usingBuffer1) {
+            buffer1.display();
+            sf::Sprite sprite(buffer1.getTexture());
+            window.draw(sprite);
+        } else {
+            buffer2.display();
+            sf::Sprite sprite(buffer2.getTexture());
+            window.draw(sprite);
+        }
+        display();
+
+        usingBuffer1 = !usingBuffer1;
+            
+    }
+
 }

@@ -26,7 +26,12 @@ public:
     /// @param screenHeight Wysokoœæ okna gry.
     /// @param windowTitle Tytu³ okna gry.
     void init(int screenWidth, int screenHeight, const std::string windowTitle);
-    //void init2b(int screenWidth, int screenHeight, const std::string windowTitle);
+    /// Inicjalizuje silnik gry u¿ywaj¹cy rêcznie zdefiniowanego podwójnego buforowania.
+    ///
+    /// @param screenWidth Szerokoœæ okna gry.
+    /// @param screenHeight Wysokoœæ okna gry.
+    /// @param windowTitle Tytu³ okna gry.
+    void init2b(int screenWidth, int screenHeight, const std::string windowTitle);
     /// Ustawia liczbê klatek na sekundê.
     ///
     /// @param fps Liczba klatek na sekundê.
@@ -68,7 +73,8 @@ public:
     void display();
     /// Uruchamia g³ówn¹ pêtlê gry.
     void run();
-    //void run2b();
+    /// Uruchamia g³ówn¹ pêtlê gry korzystaj¹c z rêcznie zdefiniowanego podwójnego buforowania.
+    void run2b();
     /// Zwraca referencjê do obiektu sf::RenderWindow.
     ///
     /// @return Referencja do obiektu sf::RenderWindow.
@@ -115,4 +121,5 @@ private:
     int fps;
     /// Zegar do mierzenia czasu miêdzy klatkami
     sf::Clock frameClock;
+    
 };

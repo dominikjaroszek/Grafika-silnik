@@ -40,3 +40,26 @@ sf::FloatRect BitmapHandler::getSize() {
 	return floor.getGlobalBounds();
 }
 
+void BitmapHandler::drawFromFile(sf::RenderWindow& window, std::string path, float PositionX, float PositionY, float scaleX, float scaleY) {
+	sf::Sprite sprite;
+	sf::Texture texture;
+	sf::Vector2f position(PositionX, PositionY);
+
+	if (!texture.loadFromFile(path)) {
+		return;
+	}
+
+	sprite.setTexture(texture);
+	sprite.setPosition(position);
+	sprite.setScale(sf::Vector2f(scaleX, scaleY));
+	window.draw(sprite);
+	
+}
+
+
+void BitmapHandler::saveToFile(std::string FileName, sf::Texture texture) {
+	sf::Image image;
+	image = texture.copyToImage();
+	image.saveToFile(FileName);	
+}
+

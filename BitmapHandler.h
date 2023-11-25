@@ -7,6 +7,8 @@ public:
 	BitmapHandler(sf::RenderWindow& window);
 	void renderBitmap();
 	sf::FloatRect getSize();
+	static void drawFromFile(sf::RenderWindow& window, std::string path, float PositionX, float PositionY, float scaleX, float scaleY);
+	static void saveToFile(std::string FileName, sf::Texture texture);
 	
 
 private:
