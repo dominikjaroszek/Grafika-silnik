@@ -53,7 +53,7 @@ public:
     ///
     /// @param factor Wspó³czynnik skalowania.
     void scale(float factor) override;
-    void drawCherry(PrimitiveRenderer& renderer, sf::Vector2f position);
+   
 
 private:
     /// Referencja do punktu pocz¹tkowego obiektu. 

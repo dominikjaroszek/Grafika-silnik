@@ -1,12 +1,13 @@
 #pragma once
 #include "UpdatableObject.h"
 #include "Projectile.h"
+#include "SpriteObject.h"
 
 /// Klasa reprezentuj¹ca gracza w grze.
 /// 
 /// Klasa Player dziedziczy po klasie UpdatableObject, co oznacza, ¿e jest to obiekt gry, który mo¿e byæ zaktualizowany w trakcie dzia³ania gry.Klasa ta implementuje
 /// metody pozwalaj¹ce na zarz¹dzanie graczem, takie jak ruch, skok, aktualizacja animacji.
-class Player : public UpdatableObject{
+class Player : public UpdatableObject, public SpriteObject{
 public:
 	/// Konstruktor klasy Player.
 	///
@@ -72,7 +73,8 @@ public:
 	//Metoda ustawiaj¹ca mo¿liwoœæ wykonania skoku.
 	void setCanJump();
 	
-
+	void animate() override;
+	void draw() override;
 	
 	
 	
