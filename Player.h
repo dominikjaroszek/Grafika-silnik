@@ -76,6 +76,7 @@ public:
 	void animate() override;
 	/// Przes³oniêcie metody z klasy DrawableObject.
 	void draw() override;
+	sf::Sprite getSprite();
 	
 	
 	

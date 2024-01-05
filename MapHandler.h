@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <Set>
 #include "Enemy.h"
+#include "Cherry.h"
 #include "MapData.h"
 #include <set>
 
@@ -24,6 +25,7 @@ public:
 	///
 	/// @return Wektor wskaŸników do obiektów Enemy.
 	std::vector<Enemy*> getEnemies();
+	std::vector<Cherry*> getCherry();
 	/// Metoda usuwaj¹ca obiekt wroga z danej mapy.
 	///
 	/// @param index Indeks obiektu wroga do usuniêcia.
@@ -36,6 +38,8 @@ public:
 	///
 	/// @return Wektor obiektów sf::Sprite reprezentuj¹cych platformy.
 	std::vector<sf::Sprite> getPlatformSprites();
+
+	void addScore();
 	
 
 private:
@@ -47,16 +51,23 @@ private:
 	std::vector<std::pair<sf::Vector2f, std::string>> map;
 	/// Licznik aktualnej mapy.
 	int mapCounter;
+	/// licznik zebranych punktow
+	int score;
 	/// Wektor przechowuj¹cy informacje o pozycji i nazwie wrogów na mapie.
 	std::vector<std::pair<sf::Vector2f, std::string>> enemies;
+	std::vector<std::pair<sf::Vector2f, std::string>> cherries;
 	/// Wektor wskaŸników do obiektów wroga stworzonych na danej mapie.
 	std::vector<Enemy*> createdEnemies;
+	std::vector<Cherry*> createdCherries;
 	/// Zbiór przechowuj¹cy indeksy map, na których wrogowie zostali ju¿ wyrenderowani.
 	std::set<int> enemiesRenderedOnMap;
+	std::set<int> cherriesRenderedOnMap;
 	/// Wektor obiektów sf::Sprite reprezentuj¹cych platformy na danej mapie.
 	std::vector<sf::Sprite> platformSprites;
 	/// Tekst u¿ywany do wyœwietlenia informacji o poziomie gry.
 	sf::Text text;
+	/// Tekst u¿ywany do wyœwietlenia informacji o obecnych punktach.
+	sf::Text textScore;
 	/// Czcionka u¿ywana do tekstu.
 	sf::Font font;
 	///Metoda wczytuj¹ca tekstury map z plików.png.

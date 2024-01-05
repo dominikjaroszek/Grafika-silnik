@@ -101,6 +101,7 @@ private:
     std::vector<Projectile> projectiles;
     ///  Wektor wskaŸników na obiekty Enemy.
     std::vector<Enemy*> enemies;
+    std::vector<Cherry*> cherries;
     /// Konstruktor klasy Engine.
     Engine();
     /// Destruktor klasy Engine.

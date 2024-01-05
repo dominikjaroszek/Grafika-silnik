@@ -153,6 +153,18 @@ void Engine::update(Player& player, BitmapHandler &bmp, MapHandler &mapHandler, 
             mapHandler.removeEnemy(i);
         // kolizja here
     }
+
+    cherries = mapHandler.getCherry();
+    for (int i = 0; i < cherries.size(); i++) {
+        cherries[i]->update();
+    }
+    for (int i = 0; i < cherries.size(); i++) {
+        sf::Sprite tmp = cherries[i]->getSprite();
+        if (tmp.getGlobalBounds().intersects(player.getSprite().getGlobalBounds()))
+            std::cout << "kolizja cherry\n";
+        
+    }
+
     
 }
 
@@ -201,14 +213,7 @@ void Engine::run() {
       
         while (deltaTime >= fixedTimeStep) {
             frameCounterUpdate();
-            if (player.getMapIndex() == 0) {
-                draw();
-                display();
-            }
-            else {
-                display();
-                draw();
-            }
+            display();
             handleInput(player, bitmapHandler, mapHandler, collissionsDetection);
             update(player, bitmapHandler, mapHandler, collissionsDetection);
             deltaTime -= fixedTimeStep;

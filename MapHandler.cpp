@@ -11,6 +11,7 @@ MapHandler::MapHandler(sf::RenderWindow& window) : window(window) {
 
 	this->renderBitmap();
 	mapCounter = 0;
+	score = 0;
 
 
 }
@@ -33,12 +34,20 @@ void MapHandler::loadTextures() {
 void MapHandler::renderBitmap() {
 
 	text.setFont(font);
-	text.setString("Level: " + std::to_string(mapCounter + 1) + "/69");
+	text.setString("Level: " + std::to_string(mapCounter + 1) + "/x");
 	text.setCharacterSize(25);
 	text.setPosition(10, 10);
 	text.setFillColor(sf::Color::White);
+
+	textScore.setFont(font);
+	textScore.setString("Score: " + std::to_string(score));
+	textScore.setCharacterSize(20);
+	textScore.setPosition(10, 40);
+	textScore.setFillColor(sf::Color::White);
+
 	this->renderPlatforms();
 	window.draw(text);
+	window.draw(textScore);
 
 }
 
@@ -70,6 +79,19 @@ void MapHandler::renderPlatforms() {
 		}
 
 	}
+
+	it = cherriesRenderedOnMap.find(mapCounter);
+	if (it == cherriesRenderedOnMap.end()) {
+		cherriesRenderedOnMap.insert(mapCounter);
+
+		cherries = mapData.getCherry(mapCounter);
+
+		for (const auto& pair : cherries) {
+			createdCherries.push_back(new Cherry(window, sf::Vector2f(pair.first.x, pair.first.y), pair.second));
+		}
+
+	}
+
 	
 
 }
@@ -79,6 +101,10 @@ void MapHandler::setMapIndex(int index) {
 
 std::vector<Enemy*> MapHandler::getEnemies() {
 	return createdEnemies;
+}
+
+std::vector<Cherry*> MapHandler::getCherry() {
+	return createdCherries;
 }
 
 void MapHandler::removeEnemy(int index) {
@@ -92,4 +118,8 @@ void MapHandler::removeEnemy(int index) {
 
 std::vector<sf::Sprite> MapHandler::getPlatformSprites() {
 	return platformSprites;
+}
+
+void MapHandler::addScore() {
+	score += 1;
 }

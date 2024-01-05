@@ -27,11 +27,15 @@ public:
 	/// @return Zbiór std::string reprezentuj¹cy unikalne typy map dostêpne w grze.
 	std::set<std::string> getAllMaps();
 
+	std::vector<std::pair<sf::Vector2f, std::string>> getCherry(int ID);
+
+
 private:
 	/// Dane o platformach dla ró¿nych poziomów.
 	std::map<int, std::vector<std::pair<sf::Vector2f, std::string>>> maps;
 	/// Dane o wrogach dla ró¿nych poziomów.
 	std::map<int, std::vector<std::pair<sf::Vector2f, std::string>>> enemies;
 
+	std::map<int, std::vector<std::pair<sf::Vector2f, std::string>>> cherries;
 };
 

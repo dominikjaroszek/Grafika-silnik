@@ -218,3 +218,7 @@ void Player::animate() {
 void Player::draw() {
     window.draw(sprite);
 }
+
+sf::Sprite Player::getSprite() {
+    return sprite;
+}

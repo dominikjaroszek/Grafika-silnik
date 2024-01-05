@@ -136,6 +136,7 @@
     <ClCompile Include="AnimatedObject.cpp" />
     <ClCompile Include="BitmapHandler.cpp" />
     <ClCompile Include="BitmapObject.cpp" />
+    <ClCompile Include="Cherry.cpp" />
     <ClCompile Include="CollissionsDetection.cpp" />
     <ClCompile Include="DrawableObject.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="AnimatedObject.h" />
     <ClInclude Include="BitmapHandler.h" />
     <ClInclude Include="BitmapObject.h" />
+    <ClInclude Include="Cherry.h" />
     <ClInclude Include="CollissionsDetection.h" />
     <ClInclude Include="DrawableObject.h" />
     <ClInclude Include="Enemy.h" />
