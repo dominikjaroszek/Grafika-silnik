@@ -1,6 +1,7 @@
 #include "Player.h"
 
 #include <SFML/Graphics.hpp>
+#include "Audio.h"
 #include <iostream>
 
 Player::Player(sf::RenderWindow& window, sf::Vector2f position) : window(window) {
@@ -126,6 +127,7 @@ void Player::jump() {
     
     if (canJump) {
         canJump = false;
+        Audio::playJump();
         this->gravity_speed = -20;
     }
    

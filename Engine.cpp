@@ -64,7 +64,7 @@ void Engine::handleInput(Player& player, BitmapHandler& bmp,MapHandler &mapHandl
   
    
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        if (player.playerPosition().x + 50 > 800 && enemies.size()>0)
+        if (player.playerPosition().x + 50 > 800 && (enemies.size()>0 || cherries.size()>0))
             player.playerSetPosition(sf::Vector2f(750, player.playerPosition().y));
 
         sf::Vector2f mv(5.0f, 0.0f);
@@ -125,11 +125,14 @@ void Engine::update(Player& player, BitmapHandler &bmp, MapHandler &mapHandler, 
 
     player.lastPosition = player.playerPosition();
     bmp.renderBitmap();
+    int lastMapIndex = mapHandler.getMapIndex();
+    
     mapHandler.setMapIndex(player.getMapIndex());
     mapHandler.renderBitmap();
     collissionsDetection.setPlatformSprites(mapHandler.getPlatformSprites());
 
-    
+    if (lastMapIndex != player.getMapIndex())
+        projectile.reset();
     
     collissionsDetection.playerCollisions(player);
 
@@ -138,20 +141,31 @@ void Engine::update(Player& player, BitmapHandler &bmp, MapHandler &mapHandler, 
     
     if (projectile)
         projectile->update();
+    
+    
 
     
       enemies = mapHandler.getEnemies();
     // std::cout << "\n" << enemies.size() <<"\n";
     for (int i = 0; i < enemies.size(); i++) {
         enemies[i]->update();
+
+        if (player.getSprite().getGlobalBounds().intersects(enemies[i]->getSprite().getGlobalBounds())) {
+            mapHandler.resetScore();
+            Audio::playAttacked();
+        }
     }
   
 
     
     for (int i = 0; i < enemies.size(); i++) {
-        if (enemies[i]->getPosition().x < player.playerPosition().x)
-            mapHandler.removeEnemy(i);
-        // kolizja here
+        if (projectile) {
+            if (enemies[i]->getSprite().getGlobalBounds().intersects(projectile->getSprite().getGlobalBounds())) {
+                mapHandler.removeEnemy(i);
+                projectile.reset();
+                Audio::playHit();
+            }
+        }
     }
 
     cherries = mapHandler.getCherry();
@@ -160,8 +174,11 @@ void Engine::update(Player& player, BitmapHandler &bmp, MapHandler &mapHandler, 
     }
     for (int i = 0; i < cherries.size(); i++) {
         sf::Sprite tmp = cherries[i]->getSprite();
-        if (tmp.getGlobalBounds().intersects(player.getSprite().getGlobalBounds()))
-            std::cout << "kolizja cherry\n";
+        if (tmp.getGlobalBounds().intersects(player.getSprite().getGlobalBounds())) {
+            mapHandler.removeCherry(i);
+            mapHandler.addScore();
+            Audio::playCherry();
+        }
         
     }
 
@@ -202,6 +219,7 @@ void Engine::run() {
     Player player(window, position);
 
     CollissionsDetection collissionsDetection;
+    Audio::playTheme();
   
     while (window.isOpen()) {
         sf::Event event;

@@ -6,9 +6,10 @@ MapData::MapData() {
 	maps[1] = { {sf::Vector2f(300,300), "platform_1"}, {sf::Vector2f(500,400), "platform_1"} };
 	maps[2] = { {sf::Vector2f(400,300), "platform_1"}, {sf::Vector2f(500,300), "platform_1"} };
 
-    enemies[0] = { {sf::Vector2f(300,300), "enemy_1"}, {sf::Vector2f(600,600), "enemy_1"} };
+    enemies[0] = { {sf::Vector2f(300,300), "enemy_1"}};
 
-    cherries[0] = { {sf::Vector2f(200,200), "cherry"}, {sf::Vector2f(100,100), "cherry"} };
+    cherries[0] = { {sf::Vector2f(200,400), "cherry"}, {sf::Vector2f(500,300), "cherry"} };
+    cherries[1] = { {sf::Vector2f(500,300), "cherry"}};
 }
 
 std::vector<std::pair<sf::Vector2f, std::string>> MapData::getMap(int ID) {

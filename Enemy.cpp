@@ -18,7 +18,6 @@ Enemy::Enemy(sf::RenderWindow& window, sf::Vector2f position, std::string type):
 void Enemy::update() {
  
     sprite.setTexture(texture);
-  
     window.draw(sprite);
    
 }
@@ -26,5 +25,9 @@ void Enemy::update() {
 sf::Vector2f Enemy::getPosition() {
     return sprite.getPosition();
 
+}
+
+sf::Sprite Enemy::getSprite() {
+    return sprite;
 }
 

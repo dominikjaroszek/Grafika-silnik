@@ -116,10 +116,30 @@ void MapHandler::removeEnemy(int index) {
 
 }
 
+void MapHandler::removeCherry(int index) {
+
+	if (index < createdCherries.size()) {
+		delete createdCherries[index];
+		createdCherries.erase(createdCherries.begin() + index);
+	}
+
+}
+
 std::vector<sf::Sprite> MapHandler::getPlatformSprites() {
 	return platformSprites;
 }
 
 void MapHandler::addScore() {
 	score += 1;
+}
+void MapHandler::resetScore() {
+	score = 0;
+}
+
+int MapHandler::getMapIndex() {
+	return mapCounter;
+}
+
+int MapHandler::getCherryNum() {
+	return mapData.getCherry(mapCounter).size();
 }

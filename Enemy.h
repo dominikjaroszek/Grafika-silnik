@@ -23,6 +23,8 @@ public:
 	/// @return Obiekt sf::Vector2f reprezentuj¹cy aktualn¹ pozycjê wroga.
 	sf::Vector2f getPosition();
 
+	sf::Sprite getSprite();
+
 
 private:
 	/// Referencja do obiektu sf::RenderWindow, na którym wrogowie s¹ renderowani.

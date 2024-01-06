@@ -8,6 +8,7 @@
 #include "CollissionsDetection.h"
 #include "Enemy.h"
 #include "MapHandler.h"
+#include "Audio.h"
 
 /// Klasa silnika gry.
 /// 
@@ -122,5 +123,6 @@ private:
     int fps;
     /// Zegar do mierzenia czasu miêdzy klatkami
     sf::Clock frameClock;
+    
     
 };

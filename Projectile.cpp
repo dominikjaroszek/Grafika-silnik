@@ -1,9 +1,11 @@
 #include "Projectile.h"
 #include <iostream>
 #include <random>
+#include "Audio.h"
 
 
 Projectile::Projectile(sf::RenderWindow& window, sf::Vector2f position, int direction, bool moving) : window(window) {
+    Audio::playAttack();
     std::random_device rd;
     std::mt19937 gen(rd()); 
     std::uniform_int_distribution<int> distribution(1, 5);
@@ -65,4 +67,8 @@ bool Projectile::projectableReady() {
         return true;
     else
         return false;
+}
+
+sf::Sprite Projectile::getSprite() {
+    return sprite;
 }

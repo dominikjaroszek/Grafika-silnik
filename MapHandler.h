@@ -21,6 +21,7 @@ public:
 	/// 
 	/// @param index Nowy indeks mapy.
 	void setMapIndex(int index);
+	int getMapIndex();
 	///Metoda zwracaj¹ca wektor wskaŸników do obiektów Enemy stworzonych na danej mapie.
 	///
 	/// @return Wektor wskaŸników do obiektów Enemy.
@@ -30,6 +31,7 @@ public:
 	///
 	/// @param index Indeks obiektu wroga do usuniêcia.
 	void removeEnemy(int index);
+	void removeCherry(int index);
 	/// Metoda renderuj¹ca bitmapê mapy na ekranie.
 	///
 	/// Renderuje bitmapê mapy na ekranie, w tym numer poziomu i liczbê poziomów. U¿ywa wczeœniej wczytanej czcionki i tekstury.
@@ -40,6 +42,8 @@ public:
 	std::vector<sf::Sprite> getPlatformSprites();
 
 	void addScore();
+	void resetScore();
+	int getCherryNum();
 	
 
 private:
