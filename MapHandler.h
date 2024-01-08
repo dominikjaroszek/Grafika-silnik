@@ -40,10 +40,14 @@ public:
 	///
 	/// @return Wektor obiektów sf::Sprite reprezentuj¹cych platformy.
 	std::vector<sf::Sprite> getPlatformSprites();
-
+	/// Metoda dodaj¹ca punkt po zebraniu wiœni.
 	void addScore();
+	/// Metoda resetuj¹ca wynik po zetknieciu z przeciwnikiem.
 	void resetScore();
+	/// Metoda zwracaj¹ca iloœæ dostêpnych do zebrania wiœni na obecnej mapie.
 	int getCherryNum();
+	/// Metoda odpowiedzialna za renderowanie napisów koñcowych gry.
+	void renderEndingScreen();
 	
 
 private:

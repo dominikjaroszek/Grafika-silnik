@@ -26,7 +26,10 @@ public:
 	///
 	/// @return Zbiór std::string reprezentuj¹cy unikalne typy map dostêpne w grze.
 	std::set<std::string> getAllMaps();
-
+	/// Metoda zwracaj¹ca dane o wiœniach dla danego poziomu.
+	///
+	/// @param ID Numer identyfikacyjny poziomu.
+	/// @return Wektor par sf::Vector2f i std::string reprezentuj¹cych pozycje i typy wiœni.
 	std::vector<std::pair<sf::Vector2f, std::string>> getCherry(int ID);
 
 
@@ -35,7 +38,7 @@ private:
 	std::map<int, std::vector<std::pair<sf::Vector2f, std::string>>> maps;
 	/// Dane o wrogach dla ró¿nych poziomów.
 	std::map<int, std::vector<std::pair<sf::Vector2f, std::string>>> enemies;
-
+	/// Dane o wiœniach dla ró¿nych poziomów.
 	std::map<int, std::vector<std::pair<sf::Vector2f, std::string>>> cherries;
 };
 

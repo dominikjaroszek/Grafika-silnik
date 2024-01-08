@@ -22,7 +22,7 @@ public:
 	///
 	/// @return Obiekt sf::Vector2f reprezentuj¹cy aktualn¹ pozycjê wroga.
 	sf::Vector2f getPosition();
-
+	/// Metoda zwracaj¹ca sprite przeciwnika.
 	sf::Sprite getSprite();
 
 

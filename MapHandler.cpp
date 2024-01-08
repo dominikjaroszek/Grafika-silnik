@@ -34,7 +34,7 @@ void MapHandler::loadTextures() {
 void MapHandler::renderBitmap() {
 
 	text.setFont(font);
-	text.setString("Level: " + std::to_string(mapCounter + 1) + "/x");
+	text.setString("Level: " + std::to_string(mapCounter + 1) + "/5");
 	text.setCharacterSize(25);
 	text.setPosition(10, 10);
 	text.setFillColor(sf::Color::White);
@@ -142,4 +142,19 @@ int MapHandler::getMapIndex() {
 
 int MapHandler::getCherryNum() {
 	return mapData.getCherry(mapCounter).size();
+}
+
+void MapHandler::renderEndingScreen() {
+	sf::Text endingText;
+	endingText.setFont(font);
+	endingText.setString("END");
+	endingText.setCharacterSize(70);
+	endingText.setPosition(350, 250);
+	endingText.setFillColor(sf::Color::White);
+	window.draw(endingText);
+
+	endingText.setString("Score: " + std::to_string(score));
+	endingText.setPosition(350, 350);
+	endingText.setCharacterSize(25);
+	window.draw(endingText);
 }

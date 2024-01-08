@@ -18,9 +18,7 @@ public:
 	/// Metoda aktualizuj¹ca stan gracza.
 	///
 	/// Aktualizuje pozycjê gracza, obs³uguje ruch, skok, grawitacjê oraz animacje.
-	
 	void update() override;
-
 	/// Metoda przemieszczaj¹ca gracza.
 	///
 	/// Przesuwa gracza o podany wektor przemieszczenia. Ustala równie¿ kierunek i aktualizuje animacjê chodu.
@@ -76,6 +74,7 @@ public:
 	void animate() override;
 	/// Przes³oniêcie metody z klasy DrawableObject.
 	void draw() override;
+	/// Metoda zwracaj¹ca sprite gracza.
 	sf::Sprite getSprite();
 	
 	

@@ -64,7 +64,7 @@ void Engine::handleInput(Player& player, BitmapHandler& bmp,MapHandler &mapHandl
   
    
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        if (player.playerPosition().x + 50 > 800 && (enemies.size()>0 || cherries.size()>0))
+        if (player.playerPosition().x + 50 > 800 && (enemies.size()>0 || cherries.size()>0 || mapHandler.getMapIndex()>4))
             player.playerSetPosition(sf::Vector2f(750, player.playerPosition().y));
 
         sf::Vector2f mv(5.0f, 0.0f);
@@ -76,11 +76,10 @@ void Engine::handleInput(Player& player, BitmapHandler& bmp,MapHandler &mapHandl
     
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-        if (player.playerPosition().x - 50 < 0 && player.getMapIndex() == 0)
+        if (player.playerPosition().x - 50 < 0 && (player.getMapIndex() == 0 ||enemies.size() > 0 || cherries.size() > 0))
             player.playerSetPosition(sf::Vector2f(50,player.playerPosition().y));
 
         sf::Vector2f mv(-5.0f, 0.0f);
-
         if(collissionsDetection.playerCollisions(player, mv) != 1)
              player.move(mv);
     }
@@ -121,6 +120,7 @@ void Engine::handleInput(Player& player, BitmapHandler& bmp,MapHandler &mapHandl
 
 
 void Engine::update(Player& player, BitmapHandler &bmp, MapHandler &mapHandler, CollissionsDetection& collissionsDetection) {
+    
     
 
     player.lastPosition = player.playerPosition();
@@ -180,6 +180,10 @@ void Engine::update(Player& player, BitmapHandler &bmp, MapHandler &mapHandler, 
             Audio::playCherry();
         }
         
+    }
+
+    if (mapHandler.getMapIndex() >4) {
+        mapHandler.renderEndingScreen();
     }
 
     

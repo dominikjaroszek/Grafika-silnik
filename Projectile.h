@@ -20,7 +20,7 @@ public:
 	/// Metoda zwraca wartoœæ true, jeœli obiekt opuœci³ obszar gry (przekroczy³ granice okna lub dotar³ do dolnej krawêdzi ekranu),
 	/// @return True, jeœli obiekt przekroczy³ obszar, False w przeciwnym razie.
 	bool projectableReady();
-
+	// Metoda zwracaj¹ca sprite pocisku.
 	sf::Sprite getSprite();
 	
 

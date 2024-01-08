@@ -30,7 +30,7 @@ int CollissionsDetection::playerCollisions(Player& player, sf::Vector2f move) {
 		player.move(move);
 
 		if (player.playerSize().intersects(sprite.getGlobalBounds())) {
-			std::cout<< "collision";
+			//std::cout<< "collision";
 			//player.playerSetPosition(currentPositon);
 			player.move(-move);
 			return 1;
@@ -66,7 +66,7 @@ int CollissionsDetection::playerCollisions(Player& player) {
 		player.move(sf::Vector2f(0, gravity));
 
 		if (player.playerSize().intersects(sprite.getGlobalBounds()) && (player.playerPosition().y  < spriteY + spriteH && underPlatform)) {
-			std::cout << "collisionBOTTOM";
+			//std::cout << "collisionBOTTOM";
 			//player.playerSetPosition(currentPositon);
 		//	player.playerSetPosition(sf::Vector2f(playerX, spriteY - playerH));
 
@@ -76,7 +76,7 @@ int CollissionsDetection::playerCollisions(Player& player) {
 		}
 
 		if (player.playerSize().intersects(sprite.getGlobalBounds()) && (player.playerPosition().y + playerH > spriteY && player.playerPosition().y + playerH < spriteY + spriteH)) {
-			std::cout << "collisionTOP";
+		//	std::cout << "collisionTOP";
 			//player.playerSetPosition(currentPositon);
 			player.playerSetPosition(sf::Vector2f(playerX, spriteY - playerH));
 			//player.move(sf::Vector2f(0, spriteY - playerH - gravity));

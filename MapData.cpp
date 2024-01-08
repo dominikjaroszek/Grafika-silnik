@@ -4,13 +4,21 @@
 MapData::MapData() {
 	maps[0] = { {sf::Vector2f(300,400), "platform_1"} };
 	maps[1] = { {sf::Vector2f(300,300), "platform_1"}, {sf::Vector2f(500,400), "platform_1"} };
-	maps[2] = { {sf::Vector2f(400,300), "platform_1"}, {sf::Vector2f(500,300), "platform_1"} };
+	maps[2] = { {sf::Vector2f(300,400), "platform_1"}, {sf::Vector2f(500,300), "platform_1"} };
+	maps[3] = { {sf::Vector2f(400,300), "platform_1"}, {sf::Vector2f(500,300), "platform_1"} };
+	maps[4] = { {sf::Vector2f(100,300), "platform_1"}, {sf::Vector2f(250,150), "platform_1"} };
 
     enemies[0] = { {sf::Vector2f(300,300), "enemy_1"}};
     enemies[1] = { {sf::Vector2f(300,200), "enemy_1"}};
+    enemies[2] = { {sf::Vector2f(450,200), "enemy_1"}};
+    enemies[3] = { {sf::Vector2f(400,200), "enemy_1"}};
+    enemies[4] = { {sf::Vector2f(400,200), "enemy_1"}};
 
     cherries[0] = { {sf::Vector2f(200,400), "cherry"}, {sf::Vector2f(500,300), "cherry"} };
-    cherries[1] = { {sf::Vector2f(500,300), "cherry"}};
+    cherries[1] = { {sf::Vector2f(300,250), "cherry"}};
+    cherries[2] = { {sf::Vector2f(200,200), "cherry"}};
+    cherries[3] = { {sf::Vector2f(400,260), "cherry"}};
+    cherries[4] = { {sf::Vector2f(100,400), "cherry"}, {sf::Vector2f(500,250), "cherry"}, {sf::Vector2f(150,250), "cherry"} };
 }
 
 std::vector<std::pair<sf::Vector2f, std::string>> MapData::getMap(int ID) {
