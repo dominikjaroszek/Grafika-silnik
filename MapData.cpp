@@ -7,6 +7,7 @@ MapData::MapData() {
 	maps[2] = { {sf::Vector2f(400,300), "platform_1"}, {sf::Vector2f(500,300), "platform_1"} };
 
     enemies[0] = { {sf::Vector2f(300,300), "enemy_1"}};
+    enemies[1] = { {sf::Vector2f(300,200), "enemy_1"}};
 
     cherries[0] = { {sf::Vector2f(200,400), "cherry"}, {sf::Vector2f(500,300), "cherry"} };
     cherries[1] = { {sf::Vector2f(500,300), "cherry"}};
